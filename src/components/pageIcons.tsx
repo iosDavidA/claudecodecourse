@@ -1,6 +1,6 @@
 import {
   Home, Download, Brain, Wrench, Command, PenLine, Bot, Coins, Zap,
-  Rocket, Puzzle, Workflow, Building2, ClipboardList,
+  Rocket, Puzzle, Workflow, Building2, ClipboardList, CalendarClock,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -19,6 +19,7 @@ export const PAGE_ICONS: Record<string, LucideIcon> = {
   '/modele':          Bot,
   '/tokenuri':        Coins,
   '/automatizare':    Zap,
+  '/programare':      CalendarClock,
   '/avansat':         Rocket,
   '/skills':          Puzzle,
   '/workflows':       Workflow,

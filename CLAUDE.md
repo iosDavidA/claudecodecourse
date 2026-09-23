@@ -4,7 +4,7 @@
 
 **Name:** CCC — Claude Code Course
 **Type:** Multi-page SPA cu React Router
-**Scop:** Curs interactiv bilingv (RO/EN) pentru Claude Code CLI — 14 pagini cu conținut educațional real, tehnic, fără placeholder-e.
+**Scop:** Curs interactiv bilingv (RO/EN) pentru Claude Code CLI — 15 pagini cu conținut educațional real, tehnic, fără placeholder-e.
 **URL local:** http://localhost:3001 (sau port disponibil dacă 3001 e ocupat — Vite alege automat 3002, 3003... etc.)
 **Stare conținut:** `CURS_STATUS.md` — modelele, prețurile și default-urile actuale din curs + unde apar în cod. Citește-l înainte de orice update de conținut și actualizează-l după.
 
@@ -42,6 +42,8 @@ ccc/
       ModelsGuide.tsx         # 5 tabs: Modele, Prețuri, Selectare, Configurare, Capabilități
       TokenManagement.tsx     # 5 tabs: Bazele, Context Window, Economii, Prompt Caching, Monitorizare
       AutomationGuide.tsx     # 5 tabs: Headless, CI/CD, Hooks, Scripturi, Securitate
+      SchedulingGuide.tsx     # 5 tabs: Prezentare, /loop, Desktop, Routines (cloud), Exemple
+                              #   Accent teal; conținut tipat explicit (interface SchedContent)
       SkillsGuide.tsx         # 5 tabs: Ce sunt Skills, Structura, Invocare, Avansat, Exemple
                               #   Tab Exemple: bibliotecă de 36 skills copyable (filtru pe categorie)
                               #   Categorii: Git | Calitate | Testing | Docs | Dev | Community | Caveman
@@ -75,13 +77,14 @@ ccc/
       ModelsPage.tsx          # "/modele"
       TokenuriPage.tsx        # "/tokenuri"
       AutomationPage.tsx      # "/automatizare"
+      ProgramarePage.tsx      # "/programare"
       AvansatPage.tsx         # "/avansat"
       SkillsPage.tsx          # "/skills"
       WorkflowsPage.tsx       # "/workflows"
       ProiectCompletPage.tsx  # "/proiect-complet"
       ReferintaPage.tsx       # "/referinta"
 
-    App.tsx                   # BrowserRouter + Routes (14 rute)
+    App.tsx                   # BrowserRouter + Routes (15 rute)
     index.css                 # Tailwind v4 import + custom theme + animații
     main.tsx
 
@@ -89,7 +92,7 @@ ccc/
   vite.config.ts              # Vite config cu plugin-uri React + Tailwind
   tsconfig.json               # strict mode activat
   pw-audit.mjs                # Audit vizual original (tokenuri-specific)
-  pw-light-audit.mjs          # Audit light mode — toate 14 paginile + tab-uri (node pw-light-audit.mjs)
+  pw-light-audit.mjs          # Audit light mode — toate 15 paginile + tab-uri (node pw-light-audit.mjs)
   pw-light-zoom.mjs           # Zoom-in pe zone specifice în light mode (node pw-light-zoom.mjs)
   pw-screenshots/             # Output screenshots din Playwright (light/ subdirector)
   CLAUDE.md                   # acest fișier
@@ -97,7 +100,7 @@ ccc/
 
 ---
 
-## Rute (Routes) — 14 pagini
+## Rute (Routes) — 15 pagini
 
 | Path | Pagină | Componentă principală | Tab-uri |
 |---|---|---|---|
@@ -110,6 +113,7 @@ ccc/
 | `/modele` | Modele & Pricing | ModelsGuide | 5 |
 | `/tokenuri` | Tokenuri | TokenManagement | 5 |
 | `/automatizare` | Automatizare & CI/CD | AutomationGuide | 5 |
+| `/programare` | Task-uri programate | SchedulingGuide | 5 |
 | `/avansat` | Avansat | AdvancedFeatures | — |
 | `/skills` | Skills | SkillsGuide | 5 |
 | `/workflows` | Workflows | Workflows | — |
@@ -117,14 +121,14 @@ ccc/
 | `/referinta` | Cheat Sheet | QuickReference | — |
 
 **Ordinea în navigare** (PAGES array în PageLayout.tsx — sursa de adevăr pentru prev/next și progress dots):
-`/` → `/instalare` → `/rationament` → `/tools` → `/comenzi` → `/prompting` → `/modele` → `/tokenuri` → `/automatizare` → `/avansat` → `/skills` → `/workflows` → `/proiect-complet` → `/referinta`
+`/` → `/instalare` → `/rationament` → `/tools` → `/comenzi` → `/prompting` → `/modele` → `/tokenuri` → `/automatizare` → `/programare` → `/avansat` → `/skills` → `/workflows` → `/proiect-complet` → `/referinta`
 
 ---
 
 ## Navbar
 
 Navbar folosește `PRIMARY_COUNT = 3` — primele 3 pagini din PAGES (excluzând Home) sunt afișate inline.
-Restul (11 pagini) apar în dropdown-ul **"Mai mult ↓"** cu emoji + label.
+Restul (12 pagini) apar în dropdown-ul **"Mai mult ↓"** cu emoji + label.
 Mobile menu afișează toate paginile.
 
 ---
@@ -149,6 +153,7 @@ Culorile accent per pagină:
 - `/modele` → purple (`bg-purple-500/20 text-purple-400`)
 - `/tokenuri` → amber (`bg-amber-500/20 text-amber-400`)
 - `/automatizare` → amber (`bg-amber-500/20 text-amber-400`)
+- `/programare` → teal (`bg-teal-500/20 text-teal-400`)
 - `/skills` → emerald (`bg-emerald-500/20 text-emerald-400`)
 - `/proiect-complet` → cyan (`bg-cyan-500/15 text-cyan-400`)
 

@@ -82,7 +82,7 @@ interface ContentShape {
 
 const CONTENT: Record<'ro' | 'en', ContentShape> = {
   ro: {
-    pageLabel: 'Lecția 12',
+    pageLabel: 'Lecția 13',
     pageTitle: 'Proiect complet cu Claude Code',
     pageDesc: 'De la idee la producție: workflow detaliat pentru un e-commerce full-stack. Fiecare fază arată ce model să folosești, ce prompt să trimiți și ce să aștepți.',
     tabs: { scenariu: 'Scenariu', plan: 'Plan', build: 'Build', quality: 'Quality', deploy: 'Deploy', modele: 'Modele' },
@@ -396,7 +396,7 @@ const CONTENT: Record<'ro' | 'en', ContentShape> = {
     },
   },
   en: {
-    pageLabel: 'Lesson 12',
+    pageLabel: 'Lesson 13',
     pageTitle: 'Full project with Claude Code',
     pageDesc: 'From idea to production: a detailed workflow for a full-stack e-commerce. Each phase shows which model to use, what prompt to send, and what to expect.',
     tabs: { scenariu: 'Scenario', plan: 'Plan', build: 'Build', quality: 'Quality', deploy: 'Deploy', modele: 'Models' },

@@ -9,7 +9,7 @@ import { useApp } from '../contexts/AppContext'
 const TIER: Record<string, number> = {
   '/instalare': 0, '/rationament': 1, '/tools': 1, '/comenzi': 1,
   '/prompting': 2, '/modele': 2, '/tokenuri': 2,
-  '/automatizare': 3, '/avansat': 3, '/skills': 3, '/workflows': 3,
+  '/automatizare': 3, '/programare': 3, '/avansat': 3, '/skills': 3, '/workflows': 3,
   '/proiect-complet': 4, '/referinta': 0,
 }
 const TIER_BADGE = [

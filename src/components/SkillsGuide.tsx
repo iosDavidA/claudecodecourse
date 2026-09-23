@@ -93,7 +93,7 @@ interface ContentShape {
 
 const CONTENT: Record<'ro' | 'en', ContentShape> = {
   ro: {
-    pageLabel: 'Lecția 10',
+    pageLabel: 'Lecția 11',
     pageTitle: 'Skills în Claude Code',
     pageDesc: 'Extinde Claude cu proceduri reutilizabile personalizate — de la slash commands simple la workflow-uri avansate cu subagent izolat și injecție dinamică de context.',
     stats: [
@@ -301,7 +301,7 @@ const CONTENT: Record<'ro' | 'en', ContentShape> = {
     },
   },
   en: {
-    pageLabel: 'Lesson 10',
+    pageLabel: 'Lesson 11',
     pageTitle: 'Skills in Claude Code',
     pageDesc: 'Extend Claude with custom reusable procedures — from simple slash commands to advanced workflows with isolated subagents and dynamic context injection.',
     stats: [

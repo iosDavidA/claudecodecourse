@@ -44,7 +44,23 @@
 - **Keyword-uri:** doar `ultrathink` e recunoscut (raționament mai profund pe o singură tură, nu schimbă effort-ul). `think`, `think hard`, `megathink` = text obișnuit.
 - Schimbarea effort-ului / modelului mid-sesiune păstrează conversația, dar poate invalida prompt cache-ul.
 
-### 1.4 API — thinking
+### 1.4 Claude Code — task-uri programate
+
+| | `/loop` (sesiune) | Desktop (local) | Routines (cloud) |
+|---|---|---|---|
+| Unde rulează | sesiunea curentă | calculatorul tău, app deschisă | cloud Anthropic |
+| Sesiune deschisă | da | nu | nu |
+| Fișiere locale | da | da | nu (clonă nouă) |
+| Permisiuni | ca în sesiune | per task | fără prompturi |
+| Interval minim | 1 min | 1 min | 1 oră |
+| Declanșatori | timp | timp / manual | timp, API, GitHub |
+
+- `/loop [interval] [prompt]` — unități s/m/h/d; fără interval = self-paced (1 min–1 h); fără prompt = mentenanță sau `loop.md` (`.claude/loop.md` > `~/.claude/loop.md`, max 25.000 bytes). Esc oprește loop-ul self-paced.
+- Tool-uri: `CronCreate`, `CronList`, `CronDelete`; ID 8 caractere; max 50 task-uri/sesiune; expirare 7 zile; jitter până la 30 min; fără catch-up; `CLAUDE_CODE_DISABLE_CRON=1`.
+- Desktop: Code → Routines → New routine → Local (Desktop ≥ 1.1.5368); preseturi Manual/Hourly/Daily/Weekdays/Weekly; o rulare de recuperare pentru ultimele 7 zile; prompt în `~/.claude/scheduled-tasks/<nume>/SKILL.md`.
+- Routines: research preview; Pro/Max/Team/Enterprise; `/schedule` (alias `/routines`), `/schedule list|update|run`; claude.ai/code/routines; API `/fire` cu header `experimental-cc-routine-2026-04-01`; GitHub: pull_request, release; branch-uri `claude/*`; limită zilnică de rulări (one-off exceptate).
+
+### 1.5 API — thinking
 
 - Opus 5.5 / Fable 5.1: thinking mereu activ; `{type:"disabled"}` și `budget_tokens` ⇒ 400. Doar `{type:"adaptive"}` sau omis.
 - Sonnet 5: adaptiv implicit, `disabled` acceptat. `budget_tokens` ⇒ 400 pe toate modelele curente, cu excepția Haiku 4.5.
@@ -53,7 +69,7 @@
 
 ---
 
-## 2. Ce conține cursul (14 pagini) și unde sunt faptele perisabile
+## 2. Ce conține cursul (15 pagini) și unde sunt faptele perisabile
 
 | Rută | Componentă | Conținut | Fapte perisabile de verificat |
 |---|---|---|---|
@@ -66,6 +82,7 @@
 | `/modele` | `ModelsGuide.tsx` | modele, prețuri, selectare, configurare, capabilități | **tot fișierul** — array `MODELS`, tabel cost/task, cache ($0.72 / $0.18), matrice, escaladare, priorități config, cod SDK, `capRows`, `thinkingModels`, bare comparație (`vals`) |
 | `/tokenuri` | `TokenManagement.tsx` | context, caching, economii | tabel context (pagini A4), cost/task (Opus 5.5), best practices |
 | `/automatizare` | `AutomationGuide.tsx` | headless, CI/CD, hooks | raport Haiku vs Sonnet/Opus |
+| `/programare` | `SchedulingGuide.tsx` | /loop, task-uri Desktop, Routines cloud, rețete | **tot fișierul** — tabel comparativ, limite (50 task-uri, 7 zile, 1 oră cloud), comenzi `/schedule`, header beta `/fire`, pași de creare în Desktop |
 | `/avansat` | `AdvancedFeatures.tsx` | MCP, subagents, worktrees | exemplu settings.json (`"model"`) |
 | `/skills` | `SkillsGuide.tsx` | SKILL.md, 36 skills copyable | mențiunea ultrathink în skills |
 | `/workflows` | `Workflows.tsx` | 6 scenarii end-to-end | prompturi cu `/effort` / `ultrathink` |
@@ -100,6 +117,7 @@
 - Deprecări: https://platform.claude.com/docs/en/about-claude/model-deprecations
 - Claude Code — modele & effort: https://code.claude.com/docs/en/model-config
 - Claude Code — comenzi: https://code.claude.com/docs/en/slash-commands
+- Task-uri programate: https://code.claude.com/docs/en/scheduled-tasks · https://code.claude.com/docs/en/desktop-scheduled-tasks · https://code.claude.com/docs/en/routines
 
 ---
 
@@ -113,6 +131,12 @@
 ---
 
 ## 6. Jurnal de update-uri
+
+### 2026-09-23 — lecție nouă: Task-uri programate (`/programare`)
+- Pagină nouă după Automatizare: `/loop`, task-uri Desktop, Routines în cloud (`/schedule`), rețete practice.
+- Fișiere: `SchedulingGuide.tsx`, `ProgramarePage.tsx`, `App.tsx`, `PageLayout.tsx` (PAGES), `pageIcons.tsx`, `HomePage.tsx` (TIER), `i18n/translations.ts`, `QuickReference.tsx` (+ `/loop`, `/schedule`).
+- Renumerotare etichete: Skills → Lecția 11, Proiect Complet → Lecția 13.
+- De urmărit: Routines e în research preview — verifică limitele și header-ul beta `/fire` la fiecare update.
 
 ### 2026-09-23 — trecere la generația Opus 5.5 / Fable 5.1
 - **Înainte:** Haiku 4.5 / Sonnet 5 ($3/$15) / Opus 4.8 ($5/$25) / Fable 5; Sonnet ca default Claude Code; keyword-uri `think` / `megathink` / `ultrathink` cu bugete fixe 10K / 32K / 128K.

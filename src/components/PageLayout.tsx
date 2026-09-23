@@ -19,6 +19,7 @@ export const PAGES: PageMeta[] = [
   { path: '/modele',      label: 'Modele',        emoji: '🤖' },
   { path: '/tokenuri',    label: 'Tokenuri',      emoji: '🪙' },
   { path: '/automatizare', label: 'Automatizare', emoji: '⚡' },
+  { path: '/programare',  label: 'Programare',    emoji: '⏰' },
   { path: '/avansat',     label: 'Avansat',       emoji: '🚀' },
   { path: '/skills',      label: 'Skills',        emoji: '⚡' },
   { path: '/workflows',        label: 'Workflows',        emoji: '🔄' },

@@ -15,6 +15,7 @@ import ReferintaPage from './pages/ReferintaPage'
 import ModelsPage from './pages/ModelsPage'
 import TokenuriPage from './pages/TokenuriPage'
 import AutomationPage from './pages/AutomationPage'
+import ProgramarePage from './pages/ProgramarePage'
 import SkillsPage from './pages/SkillsPage'
 import ProiectCompletPage from './pages/ProiectCompletPage'
 
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/modele"       element={<ModelsPage />} />
             <Route path="/tokenuri"     element={<TokenuriPage />} />
             <Route path="/automatizare" element={<AutomationPage />} />
+            <Route path="/programare"   element={<ProgramarePage />} />
             <Route path="/avansat"      element={<AvansatPage />} />
             <Route path="/skills"       element={<SkillsPage />} />
             <Route path="/workflows"         element={<WorkflowsPage />} />
