@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TERMINAL ATELIER — Design tokens
+   Warm-dark developer-luxe. Ember accent · warm neutrals · layered depth.
+   Tokens redefine the existing amber-* / zinc-* scales so the whole app inherits
+   the refined palette without touching component markup.
+   ════════════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* — Typography ———————————————————————————————————————————————————————————— */
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
+
+  /* — Ember accent (refined gold, replaces flat amber) —————————————————————— */
+  --color-amber-200: oklch(0.92 0.09 84);
+  --color-amber-300: oklch(0.87 0.13 80);
+  --color-amber-400: oklch(0.82 0.158 73);
+  --color-amber-500: oklch(0.765 0.17 66);
+  --color-amber-600: oklch(0.69 0.162 58);
+  --color-amber-700: oklch(0.58 0.14 54);
+  --color-amber-glow: oklch(0.82 0.17 71);
+  --color-ember: oklch(0.765 0.17 66);
+
+  /* — Accent unification: decorative cool hues collapse to ember ———————————
+     Ember-dominant system. Semantic colors (green=success, red=critical,
+     yellow=warning, orange=ember-family) are intentionally NOT remapped. */
+  --color-purple-50: var(--color-amber-50);   --color-purple-100: var(--color-amber-100);
+  --color-purple-200: var(--color-amber-200); --color-purple-300: var(--color-amber-300);
+  --color-purple-400: var(--color-amber-400); --color-purple-500: var(--color-amber-500);
+  --color-purple-600: var(--color-amber-600); --color-purple-700: var(--color-amber-700);
+  --color-purple-800: var(--color-amber-800); --color-purple-900: var(--color-amber-900);
+  --color-purple-950: var(--color-amber-950);
+
+  --color-blue-50: var(--color-amber-50);   --color-blue-100: var(--color-amber-100);
+  --color-blue-200: var(--color-amber-200); --color-blue-300: var(--color-amber-300);
+  --color-blue-400: var(--color-amber-400); --color-blue-500: var(--color-amber-500);
+  --color-blue-600: var(--color-amber-600); --color-blue-700: var(--color-amber-700);
+  --color-blue-800: var(--color-amber-800); --color-blue-900: var(--color-amber-900);
+  --color-blue-950: var(--color-amber-950);
+
+  --color-cyan-50: var(--color-amber-50);   --color-cyan-100: var(--color-amber-100);
+  --color-cyan-200: var(--color-amber-200); --color-cyan-300: var(--color-amber-300);
+  --color-cyan-400: var(--color-amber-400); --color-cyan-500: var(--color-amber-500);
+  --color-cyan-600: var(--color-amber-600); --color-cyan-700: var(--color-amber-700);
+  --color-cyan-800: var(--color-amber-800); --color-cyan-900: var(--color-amber-900);
+  --color-cyan-950: var(--color-amber-950);
+
+  --color-teal-50: var(--color-amber-50);   --color-teal-100: var(--color-amber-100);
+  --color-teal-200: var(--color-amber-200); --color-teal-300: var(--color-amber-300);
+  --color-teal-400: var(--color-amber-400); --color-teal-500: var(--color-amber-500);
+  --color-teal-600: var(--color-amber-600); --color-teal-700: var(--color-amber-700);
+  --color-teal-800: var(--color-amber-800); --color-teal-900: var(--color-amber-900);
+  --color-teal-950: var(--color-amber-950);
+
+  --color-emerald-50: var(--color-amber-50);   --color-emerald-100: var(--color-amber-100);
+  --color-emerald-200: var(--color-amber-200); --color-emerald-300: var(--color-amber-300);
+  --color-emerald-400: var(--color-amber-400); --color-emerald-500: var(--color-amber-500);
+  --color-emerald-600: var(--color-amber-600); --color-emerald-700: var(--color-amber-700);
+  --color-emerald-800: var(--color-amber-800); --color-emerald-900: var(--color-amber-900);
+  --color-emerald-950: var(--color-amber-950);
+
+  --color-rose-50: var(--color-amber-50);   --color-rose-100: var(--color-amber-100);
+  --color-rose-200: var(--color-amber-200); --color-rose-300: var(--color-amber-300);
+  --color-rose-400: var(--color-amber-400); --color-rose-500: var(--color-amber-500);
+  --color-rose-600: var(--color-amber-600); --color-rose-700: var(--color-amber-700);
+  --color-rose-800: var(--color-amber-800); --color-rose-900: var(--color-amber-900);
+  --color-rose-950: var(--color-amber-950);
+
+  /* — Warm neutrals (dark surfaces get a faint warm tint) ———————————————————— */
+  --color-zinc-950: oklch(0.155 0.004 66);
+  --color-zinc-900: oklch(0.205 0.0045 66);
+  --color-zinc-800: oklch(0.272 0.005 66);
+
+  /* — Terminal chrome —————————————————————————————————————————————————————— */
+  --color-terminal: oklch(0.135 0.005 66);
+  --color-terminal-header: oklch(0.205 0.006 66);
+  --color-terminal-border: oklch(0.30 0.006 66);
+
+  /* — Motion ———————————————————————————————————————————————————————————————— */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* — Layered shadows (premium dark relies on edge-light + soft ambient) ——— */
+  --shadow-lux: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -12px rgb(0 0 0 / 0.6);
+  --shadow-lux-lg: 0 2px 6px rgb(0 0 0 / 0.45), 0 28px 60px -18px rgb(0 0 0 / 0.75);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: "cv01", "cv03", "cv04", "ss03";
+  letter-spacing: -0.011em;
+}
+
+/* Ambient ember glow anchored to the top of the dark canvas */
+html.dark body {
+  background-image: radial-gradient(
+    ellipse 90% 48% at 50% -8%,
+    oklch(0.82 0.17 70 / 0.055),
+    transparent 60%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Whisper-fine grain for premium texture (very low opacity, no readability cost) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.light body::after { opacity: 0.03; mix-blend-mode: multiply; }
+
+::selection {
+  background: oklch(0.82 0.17 71 / 0.28);
+  color: #fff;
+}
+html.light ::selection { color: #18181b; }
+
+/* Accessible focus ring — ember, consistent across all interactives */
+:focus-visible {
+  outline: 2px solid oklch(0.82 0.158 73 / 0.85);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* Premium thin scrollbar */
+* { scrollbar-width: thin; scrollbar-color: oklch(0.4 0.01 66) transparent; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: oklch(0.35 0.008 66);
+  border-radius: 99px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: oklch(0.46 0.01 66); background-clip: content-box; }
+html.light ::-webkit-scrollbar-thumb { background: #c2c2cc; background-clip: content-box; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PREMIUM UTILITIES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Edge-light: subtle inset top highlight that reads as a beveled premium surface */
+.edge-light { box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.05); }
+html.light .edge-light { box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.9), 0 1px 2px rgb(0 0 0 / 0.04); }
+
+/* Global card depth — hairline top highlight on every standard rounded card
+   (dark mode). Mirrors the light-mode elevation rule for cross-theme parity. */
+html.dark .rounded-xl.border-zinc-800,
+html.dark .rounded-xl.border.border-zinc-800,
+html.dark .rounded-2xl.border-zinc-800,
+html.dark .rounded-2xl.border.border-zinc-800 {
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.035);
+}
+html.dark .preserve-dark.rounded-xl.border-zinc-800,
+html.dark .preserve-dark.rounded-2xl.border-zinc-800 {
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.05);
+}
+
+/* Interactive card: edge-light at rest, lifts + casts ambient shadow on hover */
+.card-rise {
+  transition: transform 0.3s var(--ease-lux), box-shadow 0.3s var(--ease-lux),
+    border-color 0.3s var(--ease-lux), background-color 0.3s var(--ease-lux);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.045);
+}
+.card-rise:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.08), var(--shadow-lux);
+}
+html.light .card-rise { box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.9), 0 1px 2px rgb(0 0 0 / 0.05); }
+html.light .card-rise:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 18px 40px -20px rgb(0 0 0 / 0.28);
+}
+
+/* Ember solid button — gradient face, ember glow, crisp press feedback */
+.btn-ember {
+  background-image: linear-gradient(180deg, oklch(0.81 0.165 70), oklch(0.74 0.17 64));
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.25) inset, 0 8px 24px -10px oklch(0.76 0.17 66 / 0.65);
+  transition: transform 0.18s var(--ease-lux), box-shadow 0.25s var(--ease-lux), filter 0.2s var(--ease-lux);
+}
+.btn-ember:hover { filter: brightness(1.06); box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.3) inset, 0 12px 30px -8px oklch(0.76 0.17 66 / 0.75); }
+.btn-ember:active { transform: translateY(1px); filter: brightness(0.98); }
+
+/* Ghost / secondary button — refined hover + lift */
+.btn-ghost { transition: transform 0.18s var(--ease-lux), border-color 0.25s var(--ease-lux), background-color 0.25s var(--ease-lux), color 0.2s var(--ease-lux); }
+.btn-ghost:active { transform: translateY(1px); }
+
+/* Gradient hairline border (premium framing) for hero / CTA shells */
+.gradient-frame {
+  position: relative;
+  background-clip: padding-box;
+}
+.gradient-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, oklch(0.82 0.17 71 / 0.45), oklch(0.82 0.17 71 / 0.04) 38%, transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Amber glow (kept, refined) */
+.glow-amber { box-shadow: 0 0 24px oklch(0.82 0.17 71 / 0.18), 0 0 70px oklch(0.82 0.17 71 / 0.06); }
+.text-glow { text-shadow: 0 0 28px oklch(0.82 0.17 71 / 0.35); }
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: oklch(0.24 0.005 66);
+  border-radius: 8px;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, oklch(0.4 0.01 66 / 0.4), transparent);
+  animation: shimmer 1.6s infinite;
+}
+html.light .skeleton { background: #e6e6ea; }
+html.light .skeleton::after { background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.8), transparent); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MOTION — entrance choreography
+   ════════════════════════════════════════════════════════════════════════════ */
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.6s var(--ease-lux) both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: rise 0.6s var(--ease-lux) both; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fade-in 0.5s var(--ease-soft) both; }
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scale-in 0.4s var(--ease-lux) both; }
+
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float-slow 7s ease-in-out infinite; }
+
+/* Staggered children — add `stagger` to a container; children rise in sequence */
+.stagger > * { animation: rise 0.6s var(--ease-lux) both; }
+.stagger > *:nth-child(1)  { animation-delay: 0.04s; }
+.stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.stagger > *:nth-child(3)  { animation-delay: 0.16s; }
+.stagger > *:nth-child(4)  { animation-delay: 0.22s; }
+.stagger > *:nth-child(5)  { animation-delay: 0.28s; }
+.stagger > *:nth-child(6)  { animation-delay: 0.34s; }
+.stagger > *:nth-child(7)  { animation-delay: 0.40s; }
+.stagger > *:nth-child(8)  { animation-delay: 0.46s; }
+.stagger > *:nth-child(9)  { animation-delay: 0.52s; }
+.stagger > *:nth-child(10) { animation-delay: 0.58s; }
+.stagger > *:nth-child(11) { animation-delay: 0.64s; }
+.stagger > *:nth-child(12) { animation-delay: 0.70s; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LIGHT THEME OVERRIDES — warm paper
+   ════════════════════════════════════════════════════════════════════════════ */
+html.light { color-scheme: light; }
+
+html.light body { background-color: #faf9f7; color: #18181b; }
+
+/* Ember reads darker on warm paper for WCAG AA contrast (cascades to the
+   remapped blue/purple/cyan/etc. tokens too, since they alias amber). */
+html.light {
+  --color-amber-200: #d97706;
+  --color-amber-300: #bf5d0a;
+  --color-amber-400: #b45309;
+  --color-amber-500: #a04e0a;
+  --color-amber-600: #8a4410;
+}
+
+/* Backgrounds */
+html.light .bg-zinc-950     { background-color: #faf9f7; }
+html.light .bg-zinc-950\/50 { background-color: rgba(250,249,247,0.65); }
+html.light .bg-zinc-950\/60 { background-color: rgba(250,249,247,0.75); }
+html.light .bg-zinc-950\/80 { background-color: rgba(250,249,247,0.9); }
+html.light .bg-zinc-950\/90 { background-color: rgba(250,249,247,0.94); }
+html.light .bg-zinc-950\/95 { background-color: rgba(250,249,247,0.96); }
+html.light .bg-zinc-900     { background-color: #ffffff; }
+html.light .bg-zinc-900\/25 { background-color: rgba(255,255,255,0.6); }
+html.light .bg-zinc-900\/30 { background-color: rgba(255,255,255,0.75); }
+html.light .bg-zinc-900\/40 { background-color: rgba(255,255,255,0.88); }
+html.light .bg-zinc-900\/50 { background-color: rgba(255,255,255,0.92); }
+html.light .bg-zinc-900\/60 { background-color: rgba(255,255,255,0.95); }
+html.light .bg-zinc-900\/80 { background-color: rgba(255,255,255,0.98); }
+html.light .bg-zinc-900\/90 { background-color: rgba(255,255,255,0.99); }
+html.light .bg-zinc-800     { background-color: #ecebef; }
+html.light .bg-zinc-800\/20 { background-color: rgba(236,235,239,0.4); }
+html.light .bg-zinc-800\/30 { background-color: rgba(236,235,239,0.55); }
+html.light .bg-zinc-800\/40 { background-color: rgba(236,235,239,0.65); }
+html.light .bg-zinc-800\/60 { background-color: rgba(236,235,239,0.8); }
+html.light .bg-zinc-800\/80 { background-color: rgba(236,235,239,0.92); }
+
+/* Text */
+html.light .text-white    { color: #09090b; }
+html.light .text-zinc-100 { color: #18181b; }
+html.light .text-zinc-200 { color: #27272a; }
+html.light .text-zinc-300 { color: #3f3f46; }
+html.light .text-zinc-400 { color: #52525b; }
+html.light .text-zinc-500 { color: #6b6b75; }
+html.light .text-zinc-600 { color: #71717a; }
+html.light .text-zinc-700 { color: #a1a1aa; }
+
+/* Borders */
+html.light .border-zinc-800     { border-color: #d9d8e0; }
+html.light .border-zinc-800\/50 { border-color: rgba(217,216,224,0.7); }
+html.light .border-zinc-800\/60 { border-color: rgba(217,216,224,0.8); }
+html.light .border-zinc-800\/80 { border-color: rgba(217,216,224,0.92); }
+html.light .border-zinc-700     { border-color: #b4b4be; }
+
+/* Dividers */
+html.light .divide-zinc-800 > :not([hidden]) ~ :not([hidden])    { border-color: #d9d8e0; }
+html.light .divide-zinc-800\/50 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(217,216,224,0.7); }
+html.light .divide-zinc-800\/60 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(217,216,224,0.8); }
+
+/* Hover overrides */
+html.light .hover\:bg-zinc-900:hover      { background-color: #f0eff3; }
+html.light .hover\:bg-zinc-900\/30:hover  { background-color: rgba(236,235,239,0.5); }
+html.light .hover\:bg-zinc-900\/40:hover  { background-color: rgba(236,235,239,0.6); }
+html.light .hover\:border-zinc-700:hover  { border-color: #a8a8b4; }
+html.light .hover\:text-white:hover       { color: #09090b; }
+
+/* Alternating row tints */
+html.light .odd\:bg-zinc-800\/20:nth-child(odd) { background-color: rgba(236,235,239,0.35); }
+html.light .odd\:bg-zinc-800\/30:nth-child(odd) { background-color: rgba(236,235,239,0.5); }
+
+/* Card elevation in light */
+html.light .rounded-xl.border-zinc-800,
+html.light .rounded-xl.border.border-zinc-800 {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+}
+
+/* Stronger hover border for interactive cards */
+html.light .hover\:border-amber-500\/30:hover { border-color: rgba(217,119,6,0.45); }
+html.light .hover\:border-amber-500\/40:hover { border-color: rgba(217,119,6,0.5); }
+
+/* ── preserve-dark: code blocks & terminal stay dark in light mode ─────────── */
+html.light .preserve-dark                { background-color: oklch(0.135 0.005 66); color: #d4d4d8; }
+html.light .preserve-dark .bg-zinc-950   { background-color: #0a0a0c; }
+html.light .preserve-dark .bg-zinc-900   { background-color: #18181b; }
+html.light .preserve-dark .bg-zinc-900\/80 { background-color: rgba(24,24,27,0.8); }
+html.light .preserve-dark .bg-zinc-800   { background-color: #27272a; }
+html.light .preserve-dark .bg-zinc-800\/80 { background-color: rgba(39,39,42,0.8); }
+html.light .preserve-dark .text-white    { color: #fafafa; }
+html.light .preserve-dark .text-zinc-200 { color: #e4e4e7; }
+html.light .preserve-dark .text-zinc-300 { color: #d4d4d8; }
+html.light .preserve-dark .text-zinc-400 { color: #a1a1aa; }
+html.light .preserve-dark .text-zinc-500 { color: #71717a; }
+html.light .preserve-dark .text-zinc-600 { color: #52525b; }
+html.light .preserve-dark .border-zinc-800 { border-color: #27272a; }
+html.light .preserve-dark .edge-light { box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.05); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ════════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .card-rise:hover { transform: none; }
+}
