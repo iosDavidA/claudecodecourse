@@ -166,7 +166,7 @@ const CONTENT: Record<'ro' | 'en', ContentShape> = {
       costTitle: 'Cost Control',
       costItems: [
         { n: '1', tip: '--max-turns N', desc: 'Limitează iterații agentice' },
-        { n: '2', tip: 'Haiku pentru volume', desc: 'De 3-5× mai ieftin' },
+        { n: '2', tip: 'Haiku pentru volume', desc: 'De 2-4× mai ieftin decât Sonnet 5 / Opus 5.5' },
         { n: '3', tip: '--allowedTools restrictiv', desc: 'Reduce fișiere citite' },
         { n: '4', tip: 'Timeout pe CI job', desc: '2-3 min pentru detect runaway' },
       ],
@@ -268,7 +268,7 @@ const CONTENT: Record<'ro' | 'en', ContentShape> = {
       costTitle: 'Cost Control',
       costItems: [
         { n: '1', tip: '--max-turns N', desc: 'Limit agentic iterations' },
-        { n: '2', tip: 'Haiku for volume', desc: '3-5× cheaper' },
+        { n: '2', tip: 'Haiku for volume', desc: '2-4× cheaper than Sonnet 5 / Opus 5.5' },
         { n: '3', tip: '--allowedTools restrictive', desc: 'Reduces files read' },
         { n: '4', tip: 'Timeout on CI job', desc: '2-3 min to detect runaway' },
       ],

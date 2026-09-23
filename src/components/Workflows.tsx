@@ -90,7 +90,7 @@ const CONTENT = {
           'Un API extern returnează erori 429. Trebuie adăugat rate limiting și retry logic fără a schimba interfața existentă.',
         steps: [
           'claude',
-          '> megathink API-ul Stripe returnează\n  429 Too Many Requests la volume\n  mari. Adaugă:\n  1. Rate limiter cu token bucket\n  2. Retry cu exponential backoff\n  3. Circuit breaker pt. eșecuri\n     consecutive\n  Nu modifica interfața publică\n  din lib/stripe.ts.',
+          '> /effort high\n> API-ul Stripe returnează\n  429 Too Many Requests la volume\n  mari. Adaugă:\n  1. Rate limiter cu token bucket\n  2. Retry cu exponential backoff\n  3. Circuit breaker pt. eșecuri\n     consecutive\n  Nu modifica interfața publică\n  din lib/stripe.ts.',
           '# Claude implementează toate cele 3\n# în fișiere separate, apoi le\n# integrează în client-ul existent',
           '> Rulează npm test și arată-mi\n  rezultatele.',
           '> /commit',
@@ -178,7 +178,7 @@ const CONTENT = {
           'An external API is returning 429 errors. Rate limiting and retry logic need to be added without changing the existing interface.',
         steps: [
           'claude',
-          '> megathink The Stripe API returns\n  429 Too Many Requests at high\n  volumes. Add:\n  1. Rate limiter with token bucket\n  2. Retry with exponential backoff\n  3. Circuit breaker for consecutive\n     failures\n  Do not modify the public interface\n  in lib/stripe.ts.',
+          '> /effort high\n> The Stripe API returns\n  429 Too Many Requests at high\n  volumes. Add:\n  1. Rate limiter with token bucket\n  2. Retry with exponential backoff\n  3. Circuit breaker for consecutive\n     failures\n  Do not modify the public interface\n  in lib/stripe.ts.',
           '# Claude implements all 3\n# in separate files, then\n# integrates them into the existing client',
           '> Run npm test and show me\n  the results.',
           '> /commit',

@@ -83,15 +83,15 @@ const ro: Translations = {
     heroPills: (count) => [`${count} lecții structurate`, 'Exemple de cod reale', 'Bilingv RO + EN', 'Fără placeholder-e'],
     stats: (count) => [
       { value: String(count), label: 'lecții', sub: 'de la zero la expert' },
-      { value: '5',  label: 'moduri thinking', sub: 'think → ultrathink' },
+      { value: '5',  label: 'niveluri effort', sub: 'low → max + ultrathink' },
       { value: '40+', label: 'exemple cod', sub: 'copy-pasteable' },
-      { value: '4',  label: 'modele explicate', sub: 'Haiku / Sonnet / Opus / Fable 5' },
+      { value: '4',  label: 'modele explicate', sub: 'Haiku 4.5 / Sonnet 5 / Opus 5.5 / Fable 5.1' },
     ],
     whyTitle: 'De ce Claude Code?',
     whySub: 'Nu e un chatbot — e un agent cu acces direct la codul tău',
     whyCards: [
       { title: 'Agentic nativ',       desc: 'Citește, modifică și rulează fișiere autonom. Nu sugerează — execută direct.' },
-      { title: 'Extended Thinking',   desc: 'think / megathink / ultrathink alocă buget de raționament intern pentru probleme complexe.' },
+      { title: 'Adaptive Thinking',   desc: 'Modelul decide singur cât gândește; tu reglezi adâncimea cu /effort și ultrathink pentru problemele complexe.' },
       { title: 'Context persistent',  desc: 'CLAUDE.md = system prompt permanent. Convențiile tale se aplică la fiecare sesiune.' },
       { title: 'Extensibil prin MCP', desc: 'Conectezi Claude la baze de date, browsere, API-uri externe prin MCP servers.' },
     ],
@@ -101,7 +101,7 @@ const ro: Translations = {
     ctaTitle: 'Gata să înceapă?',
     ctaSubtitle: 'Instalarea durează 2 minute. Primul task util în 10 minute. Fluență completă în câteva zile de practică.',
     ctaInstall: 'Instalare Claude Code',
-    ctaReasoning: 'Raționament → think',
+    ctaReasoning: 'Raționament → /effort',
     scenarios: [
       [
         { prompt: true,  text: 'claude "Adaugă autentificare OAuth cu Google"' },
@@ -112,7 +112,7 @@ const ro: Translations = {
         { prompt: false, text: '✓ Gata — 3 fișiere create, 2 modificate', color: 'text-green-400' },
       ],
       [
-        { prompt: true,  text: 'claude "megathink: de ce eșuează testele pe CI?"' },
+        { prompt: true,  text: 'claude --effort xhigh "De ce eșuează testele pe CI?"' },
         { prompt: false, text: '● Citesc jest.config.ts, GitHub Actions workflow...', color: 'text-zinc-500' },
         { prompt: false, text: '● Analizez diferențele env local vs CI...', color: 'text-zinc-500' },
         { prompt: false, text: '● Root cause: race condition în DB teardown', color: 'text-amber-400/80' },
@@ -130,11 +130,11 @@ const ro: Translations = {
     ],
     pageMeta: {
       '/instalare':    { desc: 'Instalare CLI, API key, prima comandă, configurare globală', badge: 'Start' },
-      '/rationament':  { desc: 'think / megathink / ultrathink — budget tokens și când să le folosești', badge: 'Core' },
+      '/rationament':  { desc: 'Adaptive thinking, /effort low → max și ultrathink — când să le folosești', badge: 'Core' },
       '/tools':        { desc: 'Read, Edit, Bash, Glob, Grep — cum Claude accesează fișierele tale', badge: 'Core' },
       '/comenzi':      { desc: 'Slash commands, scurtături tastatură, CLI flags esențiale', badge: 'Core' },
       '/prompting':    { desc: 'COCF framework, Plan Mode, CLAUDE.md, custom commands, anti-patterns', badge: 'Avansat' },
-      '/modele':       { desc: 'Haiku, Sonnet, Opus & Fable 5 — prețuri reale, când escaladezi, configurare', badge: 'Avansat' },
+      '/modele':       { desc: 'Haiku 4.5, Sonnet 5, Opus 5.5 & Fable 5.1 — prețuri reale, când escaladezi, configurare', badge: 'Avansat' },
       '/tokenuri':     { desc: 'Context window, prompt caching, strategii de economie a tokenilor', badge: 'Avansat' },
       '/automatizare': { desc: 'Headless mode, CI/CD pipelines, hooks, scripturi, securitate', badge: 'Pro' },
       '/avansat':      { desc: 'MCP servers, subagents, memory, funcționalități de nivel expert', badge: 'Pro' },
@@ -185,15 +185,15 @@ const en: Translations = {
     heroPills: (count) => [`${count} structured lessons`, 'Real code examples', 'Bilingual RO + EN', 'Free forever'],
     stats: (count) => [
       { value: String(count), label: 'lessons', sub: 'from zero to expert' },
-      { value: '5',   label: 'thinking modes', sub: 'think → ultrathink' },
+      { value: '5',   label: 'effort levels', sub: 'low → max + ultrathink' },
       { value: '40+', label: 'code examples', sub: 'copy-pasteable' },
-      { value: '4',   label: 'models explained', sub: 'Haiku / Sonnet / Opus / Fable 5' },
+      { value: '4',   label: 'models explained', sub: 'Haiku 4.5 / Sonnet 5 / Opus 5.5 / Fable 5.1' },
     ],
     whyTitle: 'Why Claude Code?',
     whySub: 'Not a chatbot — an agent with direct access to your code',
     whyCards: [
       { title: 'Natively agentic',    desc: 'Reads, modifies and runs files autonomously. Doesn\'t suggest — executes directly.' },
-      { title: 'Extended Thinking',   desc: 'think / megathink / ultrathink allocate internal reasoning budget for complex problems.' },
+      { title: 'Adaptive Thinking',   desc: 'The model decides how much to think; you tune depth with /effort and ultrathink for complex problems.' },
       { title: 'Persistent context',  desc: 'CLAUDE.md = permanent system prompt. Your conventions apply every session.' },
       { title: 'Extensible via MCP',  desc: 'Connect Claude to databases, browsers, external APIs via MCP servers.' },
     ],
@@ -203,7 +203,7 @@ const en: Translations = {
     ctaTitle: 'Ready to begin?',
     ctaSubtitle: 'Installation takes 2 minutes. First useful task in 10 minutes. Full fluency in a few days of practice.',
     ctaInstall: 'Install Claude Code',
-    ctaReasoning: 'Reasoning → think',
+    ctaReasoning: 'Reasoning → /effort',
     scenarios: [
       [
         { prompt: true,  text: 'claude "Add OAuth authentication with Google"' },
@@ -214,7 +214,7 @@ const en: Translations = {
         { prompt: false, text: '✓ Done — 3 files created, 2 modified', color: 'text-green-400' },
       ],
       [
-        { prompt: true,  text: 'claude "megathink: why are CI tests failing?"' },
+        { prompt: true,  text: 'claude --effort xhigh "Why are CI tests failing?"' },
         { prompt: false, text: '● Reading jest.config.ts, GitHub Actions workflow...', color: 'text-zinc-500' },
         { prompt: false, text: '● Analyzing local vs CI environment differences...', color: 'text-zinc-500' },
         { prompt: false, text: '● Root cause: race condition in DB teardown', color: 'text-amber-400/80' },
@@ -232,11 +232,11 @@ const en: Translations = {
     ],
     pageMeta: {
       '/instalare':    { desc: 'CLI installation, API key, first command, global configuration', badge: 'Start' },
-      '/rationament':  { desc: 'think / megathink / ultrathink — token budgets and when to use them', badge: 'Core' },
+      '/rationament':  { desc: 'Adaptive thinking, /effort low → max and ultrathink — when to use them', badge: 'Core' },
       '/tools':        { desc: 'Read, Edit, Bash, Glob, Grep — how Claude accesses your files', badge: 'Core' },
       '/comenzi':      { desc: 'Slash commands, keyboard shortcuts, essential CLI flags', badge: 'Core' },
       '/prompting':    { desc: 'COCF framework, Plan Mode, CLAUDE.md, custom commands, anti-patterns', badge: 'Advanced' },
-      '/modele':       { desc: 'Haiku, Sonnet, Opus & Fable 5 — real prices, when to escalate, configuration', badge: 'Advanced' },
+      '/modele':       { desc: 'Haiku 4.5, Sonnet 5, Opus 5.5 & Fable 5.1 — real prices, when to escalate, configuration', badge: 'Advanced' },
       '/tokenuri':     { desc: 'Context window, prompt caching, token cost strategies', badge: 'Advanced' },
       '/automatizare': { desc: 'Headless mode, CI/CD pipelines, hooks, scripts, security', badge: 'Pro' },
       '/avansat':      { desc: 'MCP servers, subagents, memory, expert-level features', badge: 'Pro' },

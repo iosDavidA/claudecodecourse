@@ -6,6 +6,7 @@
 **Type:** Multi-page SPA cu React Router
 **Scop:** Curs interactiv bilingv (RO/EN) pentru Claude Code CLI — 14 pagini cu conținut educațional real, tehnic, fără placeholder-e.
 **URL local:** http://localhost:3001 (sau port disponibil dacă 3001 e ocupat — Vite alege automat 3002, 3003... etc.)
+**Stare conținut:** `CURS_STATUS.md` — modelele, prețurile și default-urile actuale din curs + unde apar în cod. Citește-l înainte de orice update de conținut și actualizează-l după.
 
 ---
 

@@ -10,29 +10,29 @@ import { useApp } from '../contexts/AppContext'
 // ── Content ───────────────────────────────────────────────────────────────────
 const CONTENT = {
   ro: {
-    badge: 'Familia Claude 4 & 5',
+    badge: 'Familia Claude 5 · sept. 2026',
     title: 'Modele și Pricing',
     subtitle: 'Haiku, Sonnet, Opus, Fable — patru modele cu profile complet diferite. Prețuri reale, matrice de decizie, configurare per proiect și capabilități tehnice complete.',
     stats: [
-      { value: '4',    label: 'modele curente',      sub: 'Haiku / Sonnet / Opus / Fable 5' },
-      { value: '1M',   label: 'context window',      sub: 'toate în afară de Haiku (200K)' },
-      { value: '10×',  label: 'diferență de cost',   sub: 'Haiku vs Fable 5 output' },
-      { value: '90%',  label: 'task-uri cu Sonnet',  sub: 'development obișnuit' },
+      { value: '4',        label: 'modele curente',        sub: 'Haiku 4.5 / Sonnet 5 / Opus 5.5 / Fable 5.1' },
+      { value: '1M',       label: 'context window',        sub: 'toate în afară de Haiku (200K)' },
+      { value: '10×',      label: 'diferență de cost',     sub: 'Haiku vs Fable 5.1 output' },
+      { value: 'Opus 5.5', label: 'default în Claude Code', sub: 'effort implicit: medium' },
     ],
     tabs: ['Modele', 'Prețuri', 'Selectare', 'Configurare', 'Capabilități'],
     models: {
-      badges: ['Rapid & Ieftin', 'Echilibrat', 'Maximum Opus', 'Vârf de gamă'],
+      badges: ['Rapid & Ieftin', 'Rapid & Capabil', 'Default recomandat', 'Vârf de gamă'],
       taglines: [
         'Volum mare, latență mică, cost minim',
-        'Raportul calitate/cost optim — default recomandat',
-        'Cel mai capabil Opus — pentru probleme care contează',
+        'Cea mai bună combinație viteză/inteligență la jumătate din prețul Opus',
+        'Default-ul Claude Code — agentic coding și knowledge work',
         'Raționament extrem și agenți long-horizon',
       ],
       descriptions: [
         'Cel mai rapid și cel mai ieftin model Claude. Optimizat pentru task-uri high-volume care nu necesită raționament complex. Răspunde aproape instant — ideal pentru automatizări și feedback în timp real.',
-        'Excelent echilibru între inteligență, viteză și cost — aproape de calitatea Opus la coding. Gestionează 90% din task-urile de development. Adaptive thinking activ implicit, până la 128K output tokens.',
-        'Cel mai capabil model Opus — raționament excepțional pentru probleme complexe, ambigue sau cu consecințe mari, la $5/$25 per MTok. Escaladarea standard când Sonnet nu e suficient.',
-        'Cel mai inteligent model Anthropic disponibil public. Thinking mereu activ (nu se poate dezactiva), sesiuni agentice care rulează minute sau ore în autonomie. Îl folosești pentru problemele pe care niciun alt model nu le rezolvă.',
+        'Excelent echilibru între inteligență, viteză și cost, la $2/$10 per MTok. Alegerea bună pentru sesiuni rapide, volum mare sau subagenți. Adaptive thinking implicit (se poate dezactiva), până la 128K output tokens.',
+        'Modelul implicit în Claude Code și punctul de pornire recomandat de Anthropic pentru majoritatea workload-urilor. Mai ieftin decât Opus-urile anterioare ($4/$20 per MTok), thinking mereu activ, effort implicit medium.',
+        'Cel mai capabil model Anthropic disponibil public. Thinking mereu activ (nu se poate dezactiva), sesiuni agentice care rulează minute sau ore în autonomie. Îl folosești când Opus 5.5 la effort mare tot nu e suficient.',
       ],
       bestFor: [
         [
@@ -43,18 +43,18 @@ const CONTENT = {
           'Prototipare și iterații rapide',
         ],
         [
-          'Development de zi cu zi',
-          'Feature-uri noi de complexitate medie',
-          'Code review și debugging',
-          'Refactorizări moderate (2-5 fișiere)',
+          'Sesiuni rapide cu buget redus',
+          'Feature-uri de complexitate medie',
+          'Subagenți și task-uri paralele',
           'Generare teste unitare și de integrare',
+          'Volum mare prin API / Batch',
         ],
         [
-          'Redesign arhitectural major',
-          'Migrări complexe (REST → tRPC, etc.)',
+          'Development de zi cu zi (default)',
+          'Feature-uri complexe și refactorizări multi-fișier',
           'Debugging critic de producție fără repro',
+          'Redesign arhitectural și migrări',
           'Security audit și analize de risc',
-          'Decizii cu impact mare de business',
         ],
         [
           'Agenți autonomi long-horizon (ore de lucru)',
@@ -73,59 +73,58 @@ const CONTENT = {
         ],
         [
           'Task-uri banale repetitive → folosește Haiku',
-          'Redesign arhitectural complet',
-          'Probleme critice cu ambiguitate extremă',
+          'Probleme ambigue unde Opus face diferența',
+          'Agenți long-horizon critici',
         ],
         [
           'Completare cod simplu → Haiku',
-          'Development zilnic → Sonnet',
-          'Sesiuni de explorare și prototipare',
-          'Generare boilerplate',
+          'Pipelines CI cu volum mare → Haiku / Sonnet',
+          'Probleme la care a eșuat și la xhigh → Fable 5.1',
+          'Effort max din reflex — medium e default-ul bun',
         ],
         [
-          'Development zilnic → Sonnet 5',
-          'Task-uri rutiniere — cost dublu față de Opus',
+          'Development zilnic → Opus 5.5',
+          'Task-uri rutiniere — de 2,5× mai scump decât Opus 5.5',
           'Răspunsuri rapide — turele pot dura minute',
           'Organizații cu zero data retention',
         ],
       ],
       examples: [
         `# Activare în Claude Code:
-claude --model claude-haiku-4-5
+claude --model haiku
 
 # Sau în .claude/settings.json:
-{ "model": "claude-haiku-4-5" }
+{ "model": "haiku" }
 
 # Ideal pentru:
 > Generează getterele pentru
   interfața UserProfile.ts
 > Explică în 2 linii ce face
   această funcție.`,
-        `# Default în Claude Code:
-claude  # Sonnet automat
-
-# Explicit:
-claude --model claude-sonnet-5
+        `# Activare:
+claude --model sonnet
+# sau ID complet: claude-sonnet-5
 
 # Ideal pentru:
 > Implementează pagination
   cursor-based în lib/api.ts
-> think Refactorizează AuthContext
-  pentru a elimina prop drilling.`,
-        `# Activare:
-claude --model claude-opus-4-8
+> Scrie teste Vitest pentru
+  toate funcțiile din lib/cart.ts`,
+        `# Default în Claude Code:
+claude  # Opus 5.5 automat
 
-# Sau în sesiune:
+# Explicit / în sesiune:
+claude --model opus
 > /model opus
 
 # Ideal pentru:
-> ultrathink Migrează autentificarea
-  de la cookies la JWT stateless,
-  menținând sesiunile active.
-> Analizează implicațiile de
-  securitate ale acestei migrări.`,
+> /effort xhigh
+> Migrează autentificarea de la
+  cookies la JWT stateless,
+  menținând sesiunile active.`,
         `# Activare:
-claude --model claude-fable-5
+claude --model fable
+# sau: /model best (fable dacă e disponibil)
 
 # Ideal pentru:
 > Rulează autonom: migrează întregul
@@ -138,7 +137,7 @@ claude --model claude-fable-5
     },
     tabModele: {
       title: 'Modelele Claude actuale',
-      desc: 'Patru modele cu profile distincte — nu sunt variante ale aceluiași model. Fiecare e optimizat pentru o clasă diferită de probleme. Claude Fable 5 e vârful gamei: primul model din familia Claude 5, gândit pentru raționament extrem și agenți long-horizon.',
+      desc: 'Patru modele cu profile distincte — nu sunt variante ale aceluiași model. Anthropic recomandă Claude Opus 5.5 ca punct de pornire pentru majoritatea workload-urilor (și e default-ul în Claude Code); Claude Fable 5.1 e vârful gamei, pentru raționament extrem și agenți long-horizon.',
       barLabels: ['Inteligență', 'Viteză', 'Cost relativ'],
       idealFor: 'Ideal pentru',
       notFor: 'Nu folosi pentru',
@@ -154,9 +153,9 @@ claude --model claude-fable-5
     },
     tabPreturi: {
       title: 'Prețuri și costuri reale',
-      desc: 'Prețurile sunt per milion de tokeni (MTok). Cu prompt caching activ, costul input scade la ~10% — esențial pentru sesiunile lungi cu CLAUDE.md consistent.',
+      desc: 'Prețurile sunt per milion de tokeni (MTok). Cache read costă 10% din input (5% pe Opus 5.5, 2,5% pe Fable 5.1) — esențial pentru sesiunile lungi cu CLAUDE.md consistent. Batch API: −50% la input și output.',
       thContext: 'Context',
-      footnote: '* Prețuri aproximative per milion tokeni (MTok) — verifică anthropic.com/pricing pentru valorile curente.',
+      footnote: '* Prețuri Claude API (first-party) verificate în sept. 2026 — cache write = scriere 5 minute. Verifică platform.claude.com/docs/en/about-claude/pricing pentru valorile curente.',
       costTitle: 'Diferența de cost per task tipic',
       tasks: [
         'Explică o funcție simplă (~2K tok)',
@@ -167,22 +166,22 @@ claude --model claude-fable-5
       ],
       tipContent: (
         <>
-          <strong className="text-green-300">Strategia Opus + Sonnet:</strong> Folosește Opus pentru <em>design și decizie</em> (50K tokeni), Sonnet pentru <em>implementare</em> (200K tokeni). Costul total: ~$4.25 față de ~$6.25 cu Opus pentru tot — economie de ~30%, și mai mare dacă escaladezi doar decizia la Fable 5.
+          <strong className="text-green-300">Strategia Opus + Sonnet:</strong> Opus 5.5 pentru <em>design și decizie</em> (50K tokeni), Sonnet 5 pentru <em>implementare</em> (200K tokeni). Costul total: ~$3.00 față de ~$5.00 cu Opus pentru tot — economie de ~40%. Adesea mai simplu: rămâi pe Opus 5.5 și coboară effort-ul la medium/low pentru partea de rutină.
         </>
       ),
       cacheTitle: 'Impactul prompt caching pe sesiunile lungi',
-      cacheDesc: 'Într-o sesiune tipică cu CLAUDE.md de 2K tokeni și 30 de mesaje, caching-ul reduce costul de input cu ~60%.',
-      noCache: 'Fără caching — 30 mesaje Sonnet',
-      withCache: 'Cu caching activ — 30 mesaje Sonnet',
+      cacheDesc: 'Într-o sesiune tipică cu CLAUDE.md de 2K tokeni și 30 de mesaje pe Opus 5.5 (default), caching-ul reduce costul de input cu ~75%.',
+      noCache: 'Fără caching — 30 mesaje Opus 5.5',
+      withCache: 'Cu caching activ — 30 mesaje Opus 5.5',
       noCacheRows: [
         ['CLAUDE.md × 30 cereri (2K × 30)', '60K tokeni input'],
         ['System prompt × 30', '90K tokeni'],
         ['Conversație (medie 1K/mesaj)', '30K tokeni'],
       ],
       withCacheRows: [
-        ['Cache read (CLAUDE.md + system)', '150K × $0.30'],
-        ['Cache write (prima dată)', '5K × $3.75'],
-        ['Conversație nouă', '30K × $3.00'],
+        ['Cache read (CLAUDE.md + system)', '150K × $0.20'],
+        ['Cache write (prima dată)', '5K × $5.00'],
+        ['Conversație nouă', '30K × $4.00'],
       ],
       totalInput: 'Total input cost',
       infoContent: 'Claude Code activează prompt caching automat pentru CLAUDE.md și system prompt. Nu trebuie configurat nimic — funcționează implicit la fiecare sesiune.',
@@ -190,53 +189,57 @@ claude --model claude-fable-5
     },
     tabSelectare: {
       title: 'Când să folosești care model',
-      desc: 'Regula de bază: pornești cu Sonnet (default), escaladezi la Opus când Sonnet nu e suficient, și cobori la Haiku pentru task-uri mecanice sau high-volume.',
+      desc: 'Regula de bază în 2026: pornești cu Opus 5.5 (default, effort medium), cobori la Sonnet 5 sau Haiku pentru viteză, volum sau cost, și urci la Fable 5.1 doar când Opus la effort mare nu e suficient. Înainte să schimbi modelul, încearcă să ajustezi effort-ul.',
       decisionTitle: 'Ghid de decizie rapidă',
       qas: [
         { q: 'Completare cod, boilerplate, getter/setter, docstrings?',   a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
         { q: 'Explicație rapidă a unui bloc de cod?',                     a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
         { q: 'CI automation cu sute de fișiere procesate?',               a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
-        { q: 'Bug fix cu stack trace clar, 1-2 fișiere?',                a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Feature nouă de complexitate medie?',                       a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Refactorizare 2-5 fișiere cu logică clară?',               a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Code review cu focus pe securitate sau performanță?',       a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Sonnet a eșuat sau răspunsul e prea vag?',                 a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
+        { q: 'Bug fix cu stack trace clar, vrei răspuns rapid și ieftin?', a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'Subagenți care citesc mult cod în paralel?',                a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'Generare de teste pentru un modul existent?',               a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'Feature nouă, refactorizare, code review — munca zilnică?', a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Redesign arhitectural sau migrare de stack?',               a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Bug critic de producție fără reproducere clară?',          a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Security audit complet al unui modul critic?',              a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
-        { q: 'Agent long-horizon sau problemă la care Opus a eșuat?',     a: 'Fable 5', color: 'text-rose-400',  bg: 'border-rose-500/20 bg-rose-500/5' },
+        { q: 'Opus 5.5 a eșuat și la effort xhigh?',                      a: 'Fable 5.1', color: 'text-rose-400', bg: 'border-rose-500/20 bg-rose-500/5' },
+        { q: 'Agent autonom care lucrează ore întregi?',                  a: 'Fable 5.1', color: 'text-rose-400', bg: 'border-rose-500/20 bg-rose-500/5' },
       ],
       matrixTitle: 'Matrice completă — scenarii vs modele',
       matrixColScenario: 'Scenariu',
       matrixRows: [
-        ['Completare cod / boilerplate',         '✓ Ideal',     '✓ Merge',      '✗ Overkill'],
-        ['Bug cu stack trace clar',              '○ Merge',     '✓ Ideal',      '✗ Overkill'],
-        ['Feature moderată (1-3 fișiere)',        '✗ Slab',      '✓ Ideal',      '○ Inutil'],
-        ['Refactorizare complexă multi-fișier',  '✗ Slab',      '✓ Bun',        '○ Escaladare'],
+        ['Completare cod / boilerplate',         '✓ Ideal',     '✓ Merge',      '○ Overkill'],
+        ['Bug cu stack trace clar',              '○ Merge',     '✓ Ideal',      '✓ Bun'],
+        ['Feature moderată (1-3 fișiere)',        '✗ Slab',      '✓ Bun',        '✓ Ideal'],
+        ['Refactorizare complexă multi-fișier',  '✗ Slab',      '○ Merge',      '✓ Ideal'],
         ['Design arhitectural nou',               '✗ Nu',        '○ Parțial',    '✓ Ideal'],
-        ['Migrare framework / stack change',      '✗ Nu',        '✗ Insuficient','✓ Ideal'],
-        ['Code review de securitate',             '✗ Slab',      '✓ Bun',        '○ Audit critic'],
-        ['CI pipeline / automatizare volum',      '✓ Ideal',     '○ Prea scump', '✗ Nu'],
-        ['Generare teste unitare',                '○ Simple',    '✓ Ideal',      '✗ Overkill'],
+        ['Migrare framework / stack change',      '✗ Nu',        '○ Parțial',    '✓ Ideal'],
+        ['Code review de securitate',             '✗ Slab',      '✓ Bun',        '✓ Ideal'],
+        ['CI pipeline / automatizare volum',      '✓ Ideal',     '✓ Bun',        '○ Prea scump'],
+        ['Generare teste unitare',                '○ Simple',    '✓ Ideal',      '✓ Bun'],
         ['Debug producție fără repro',            '✗ Nu',        '○ Încearcă',   '✓ Ideal'],
       ],
       escalTitle: 'Strategia de escaladare',
-      escalDesc: 'Nu mergi direct la Opus — testezi cu Sonnet primul. Dacă Sonnet eșuează, escaladezi cu același context acumulat. Economia e semnificativă.',
-      escalCode: `# Pasul 1 — încearcă cu Sonnet (default)
-> megathink Debughez un race condition
-  în sistemul de notificări.
+      escalDesc: 'Primul pas nu e schimbarea modelului, ci a effort-ului. Pe Opus 5.5 urci de la medium la xhigh; abia dacă tot nu converge treci la Fable 5.1 — cu același context acumulat.',
+      escalCode: `# Pasul 1 — Opus 5.5 pe default (effort medium)
+> Debughez un race condition în sistemul
+  de notificări.
   Fișiere: lib/notifications.ts, workers/notify.ts
 
-# Dacă Sonnet nu convergea la o soluție clară:
-> /model opus
-> Continuă analiza — suntem blocați pe
-  race condition-ul din NotificationQueue.
-  Soluția lui Sonnet nu era corectă pentru că [X].
+# Nu converge? Urci effort-ul, nu modelul:
+> /effort xhigh
+> Continuă analiza — soluția de mai sus nu e
+  corectă pentru că [X]. Verifică ordinea
+  evenimentelor din NotificationQueue.
 
-# Opus rezolvă. Implementarea o faci cu Sonnet:
-> /model sonnet
-> Implementează soluția propusă de mai sus.
-  Contextul e complet — scrie codul.`,
+# Tot blocat? Escaladezi la Fable 5.1:
+> /model fable
+> Continuă de unde am rămas.
+
+# Rezolvat. Implementarea de rutină — înapoi:
+> /model opus
+> /effort medium
+> Implementează soluția propusă mai sus.`,
       tipContent: (
         <>
           Schimbând modelul în mijlocul sesiunii, contextul conversației (toate mesajele, fișierele citite) se <strong className="text-green-300">păstrează complet</strong>. Nu pierzi progresul — schimbi doar puterea de calcul.
@@ -244,107 +247,122 @@ claude --model claude-fable-5
       ),
       switchTitle: 'Schimbarea modelului în sesiune',
       switchLabel1: 'Comenzi disponibile',
-      switchLabel2: 'Flux Opus → Sonnet recomandat',
+      switchLabel2: 'Flux Opus → Sonnet (opțional)',
       switchCode1: `# Din prompt, oricând:
-> /model opus
-> /model sonnet
-> /model haiku
+> /model opus      # Opus 5.5
+> /model sonnet    # Sonnet 5
+> /model haiku     # Haiku 4.5
+> /model fable     # Fable 5.1
+> /model opusplan  # Opus în plan mode, Sonnet la execuție
 
-# Cu ID complet:
-> /model claude-opus-4-8
+# /model <nume> salvează alegerea ca default.
+# Doar pentru sesiunea curentă: /model → tasta "s"
 
 # Verifică modelul activ:
 > /status
 
-# Sau prin flag la lansare:
-claude --model claude-opus-4-8`,
-      switchCode2: `# Opus pentru DECIZIE (costisitor, scurt):
+# Sau prin flag la lansare (doar acea sesiune):
+claude --model opus`,
+      switchCode2: `# Opus pentru DECIZIE (scurt):
 /model opus
 > ultrathink Care e cea mai bună
   arhitectură pentru sistemul X?
   Analizează 3 opțiuni.
 
-# Sonnet pentru IMPLEMENTARE (ieftin, lung):
+# Sonnet pentru IMPLEMENTARE (lung, ~2× mai ieftin):
 /model sonnet
 > Implementează opțiunea 2 propusă.
-  Respectă constrângerile din plan.`,
+  Respectă constrângerile din plan.
+
+# Automat: /model opusplan face exact asta.`,
     },
     tabConfigurare: {
       title: 'Configurare model',
-      desc: 'Poți seta modelul la patru niveluri: CLI flag (sesiune), settings.json (proiect), variabilă de mediu (global) sau API (programmatic). Fiecare nivel suprascrie cel anterior.',
+      desc: 'Poți seta modelul la mai multe niveluri: settings.json (persistent), variabilă de mediu, flag CLI sau /model în sesiune. Nivelul mai specific îl suprascrie pe cel general. Effort-ul se configurează separat, cu aceeași logică.',
       priorityTitle: 'Prioritate configurare (crescător)',
       priorities: [
-        { level: '4 — Cel mai mic', label: 'Default hardcodat',       val: 'claude-sonnet-5',                        color: 'border-zinc-700 bg-zinc-800/30',     badge: 'text-zinc-500'  },
-        { level: '3',               label: 'Variabilă de mediu',       val: 'ANTHROPIC_MODEL=claude-sonnet-5',        color: 'border-blue-500/20 bg-blue-500/5',  badge: 'text-blue-400'  },
-        { level: '2',               label: '.claude/settings.json',    val: '{ "model": "claude-opus-4-8" }',           color: 'border-amber-500/20 bg-amber-500/5',badge: 'text-amber-400' },
-        { level: '1 — Prioritate maximă', label: 'CLI flag --model',  val: 'claude --model claude-haiku-4-5', color: 'border-purple-500/20 bg-purple-500/5',badge: 'text-purple-400'},
+        { level: '4 — Cel mai mic', label: 'Default cont / plan',      val: 'Opus 5.5 (Pro, Max, Team, Enterprise, API)', color: 'border-zinc-700 bg-zinc-800/30',     badge: 'text-zinc-500'  },
+        { level: '3',               label: 'settings.json',            val: '{ "model": "opus" }',                        color: 'border-amber-500/20 bg-amber-500/5', badge: 'text-amber-400' },
+        { level: '2',               label: 'Variabilă de mediu',       val: 'ANTHROPIC_MODEL=sonnet',                     color: 'border-blue-500/20 bg-blue-500/5',   badge: 'text-blue-400'  },
+        { level: '1 — Prioritate maximă', label: '--model / /model',   val: 'claude --model haiku',                       color: 'border-purple-500/20 bg-purple-500/5', badge: 'text-purple-400'},
       ],
       settingsTitle: '.claude/settings.json',
-      settingsDesc: 'Configurat per proiect, versionat în repo. Se aplică tuturor sesiunilor din directorul respectiv.',
+      settingsDesc: 'Configurat per proiect, versionat în repo. Se aplică tuturor sesiunilor din directorul respectiv. Poți folosi alias-uri (opus, sonnet, haiku, fable) — ele urmează automat cea mai nouă versiune.',
       settingsCode: `// .claude/settings.json
 {
-  "model": "claude-sonnet-5",
+  "model": "opus",
+
+  // Effort implicit + override per model (opțional):
+  "effortLevel": "medium",
+  "modelSettings": {
+    "opus": { "effort": "high" }
+  },
 
   // Permisiuni tool-uri (opțional):
   "permissions": {
     "allow": ["Bash(npm run *)", "Edit", "Read"],
     "deny": ["Bash(rm -rf *)"]
-  },
-
-  // Nivel de aprobare auto (opțional):
-  "autoApprove": ["Read", "Glob", "Grep"]
+  }
 }`,
       infoContent: (
         <>
-          <code className="text-blue-300">.claude/settings.json</code> e versionat în git — toată echipa primește același model default pentru proiect. Ideal pentru a seta Haiku în pipelines CI și Sonnet în development.
+          <code className="text-blue-300">.claude/settings.json</code> e versionat în git — toată echipa primește același model default pentru proiect. Atenție: <code className="text-blue-300">/model</code> scrie alegerea în settings-urile tale de utilizator, deci devine default pentru sesiunile noi.
         </>
       ),
       envTitle: 'Variabile de mediu',
-      envCode: `# ~/.bashrc sau ~/.zshrc — model global personal:
-export ANTHROPIC_MODEL="claude-sonnet-5"
+      envCode: `# Model pentru sesiunea lansată:
+ANTHROPIC_MODEL=haiku claude -p "..."
 
-# Sau per sesiune de terminal:
-ANTHROPIC_MODEL=claude-haiku-4-5 claude -p "..."
+# Ce model folosește fiecare alias:
+export ANTHROPIC_DEFAULT_OPUS_MODEL="claude-opus-5-5"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="claude-sonnet-5"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="claude-haiku-4-5"
+export ANTHROPIC_DEFAULT_FABLE_MODEL="claude-fable-5-1"
+
+# Model implicit pentru subagenți:
+export CLAUDE_CODE_SUBAGENT_MODEL="sonnet"
+
+# Effort global (suprascrie /effort și settings):
+export CLAUDE_CODE_EFFORT_LEVEL="medium"
 
 # În CI/CD (GitHub Actions):
 env:
-  ANTHROPIC_MODEL: claude-haiku-4-5
+  ANTHROPIC_MODEL: haiku
   ANTHROPIC_API_KEY: \${{ secrets.ANTHROPIC_API_KEY }}`,
       apiTitle: 'Selectare model în Anthropic SDK',
-      apiDesc: 'Dacă construiești cu API-ul direct, modelul e un parametru simplu. Combini cu extended thinking pentru control complet.',
+      apiDesc: 'Dacă construiești cu API-ul direct, modelul e un parametru simplu. Adâncimea raționamentului o controlezi prin output_config.effort.',
       apiCode: `import Anthropic from '@anthropic-ai/sdk'
 
 const client = new Anthropic()
 
-// Haiku — completare rapidă, cost minim
+// Haiku 4.5 — completare rapidă, cost minim
 const quickResponse = await client.messages.create({
   model: 'claude-haiku-4-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: promptSimple }],
 })
 
-// Sonnet — development obișnuit cu adaptive thinking
+// Sonnet 5 — rapid și ieftin, adaptive thinking implicit
 const devResponse = await client.messages.create({
   model: 'claude-sonnet-5',
   max_tokens: 16000,
-  thinking: { type: 'adaptive' },
   output_config: { effort: 'high' },
   messages: [{ role: 'user', content: promptComplex }],
 })
 
-// Opus — decizie arhitecturală (effort maxim)
+// Opus 5.5 — default recomandat. Thinking mereu activ;
+// effort implicit 'medium' — setează-l explicit când contează.
 const archResponse = await client.messages.create({
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5-5',
   max_tokens: 16000,
-  thinking: { type: 'adaptive' },
   output_config: { effort: 'xhigh' },
   messages: [{ role: 'user', content: promptCritic }],
 })
 
-// Fable 5 — probleme extreme. Thinking e mereu activ:
-// omite parametrul (setarea explicită returnează 400).
+// Fable 5.1 — probleme extreme. Thinking mereu activ:
+// omite parametrul thinking ('disabled' returnează 400).
 const extremeResponse = await client.messages.create({
-  model: 'claude-fable-5',
+  model: 'claude-fable-5-1',
   max_tokens: 16000,
   output_config: { effort: 'xhigh' },
   messages: [{ role: 'user', content: promptExtrem }],
@@ -353,36 +371,38 @@ const extremeResponse = await client.messages.create({
       strats: [
         {
           ctx: 'Development local',
-          where: '.claude/settings.json',
-          rationale: 'Cel mai echilibrat pentru task-uri zilnice. Poți escalada la Opus din sesiune.',
+          where: 'default sau .claude/settings.json',
+          rationale: 'Opus 5.5 pe effort medium acoperă munca zilnică. Urci effort-ul din sesiune când problema devine grea.',
         },
         {
           ctx: 'CI/CD pipelines',
           where: 'ENV var în CI config',
-          rationale: 'Rulează pe sute de fișiere la fiecare push. Haiku reduce costul cu 5-10× față de Sonnet.',
+          rationale: 'Rulează pe sute de fișiere la fiecare push. Haiku costă de 4× mai puțin decât Opus 5.5 la output.',
         },
         {
-          ctx: 'Sesiune de arhitectură',
-          where: '--model flag sau /model opus',
-          rationale: 'Sesiune dedicată pentru decizii mari. Schimbi înapoi la Sonnet pentru implementare.',
+          ctx: 'Sesiune agentică grea',
+          where: '--model fable sau /model fable',
+          rationale: 'Pentru task-uri de ore sau probleme la care Opus eșuează. Revii la Opus pentru implementarea de rutină.',
         },
       ],
     },
     tabCapabilitati: {
       title: 'Capabilități și limitări per model',
-      desc: 'Dincolo de inteligență și cost, modelele diferă în capabilități tehnice concrete — context window, extended thinking, tool use, output maxim.',
+      desc: 'Dincolo de inteligență și cost, modelele diferă în capabilități tehnice concrete — context window, thinking, effort, output maxim.',
       thCap: 'Capabilitate',
       capRows: [
         { cap: 'Context window',           h: '200K tokeni', s: '1M tokeni',   o: '1M tokeni', f: '1M tokeni' },
         { cap: 'Max output tokens',         h: '64K',         s: '128K',        o: '128K',      f: '128K' },
-        { cap: 'Thinking',                  h: '✓ budget_tokens', s: '✓ adaptive + effort', o: '✓ adaptive + effort', f: '✓ mereu activ' },
+        { cap: 'Thinking',                  h: '✓ budget_tokens', s: '✓ adaptive', o: '✓ mereu activ', f: '✓ mereu activ' },
+        { cap: 'Effort implicit',           h: '—',           s: 'high',        o: 'medium',    f: 'high' },
+        { cap: 'Knowledge cutoff',          h: 'feb. 2025',   s: 'ian. 2026',   o: 'iun. 2026', f: 'iun. 2026' },
         { cap: 'Tool use (Bash, Read etc)', h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Vision (imagini)',           h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Streaming',                  h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Prompt caching',             h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Batch API',                  h: '✓',           s: '✓',           o: '✓',         f: '✓' },
-        { cap: 'Latență medie',              h: '~1-3s',       s: '~5-15s',      o: '~15-60s',   f: 'minute pe task grele' },
-        { cap: 'Rate limit (RPM implicit)', h: 'Ridicat',     s: 'Mediu',       o: 'Scăzut',    f: 'Scăzut' },
+        { cap: 'Latență relativă',           h: 'Cea mai mică', s: 'Mică',       o: 'Moderată',  f: 'Mare — minute pe task grele' },
+        { cap: 'Fast mode (API)',            h: '✗',           s: '✗',           o: '✓ $8/$40',  f: '✗' },
       ],
       thinkingTitle: 'Thinking — detalii per model',
       thinkingModels: [
@@ -394,21 +414,21 @@ const extremeResponse = await client.messages.create({
         },
         {
           thinking: true,
-          budget: 'adaptive — modelul decide singur',
+          budget: 'adaptive — se poate dezactiva',
           recommended: "effort: 'high' (default) / 'xhigh'",
-          note: 'Adaptive thinking e activ implicit. budget_tokens returnează eroare 400 — controlezi adâncimea prin output_config.effort (low → max).',
+          note: 'Adaptive thinking e activ implicit. budget_tokens returnează 400 — controlezi adâncimea prin output_config.effort (low → max).',
         },
         {
           thinking: true,
-          budget: 'adaptive — modelul decide singur',
-          recommended: "effort: 'xhigh' pentru coding/agentic",
-          note: 'Maximul de raționament din tier-ul Opus. effort xhigh e default-ul Claude Code.',
+          budget: 'mereu activ — nu se poate dezactiva',
+          recommended: "effort: 'medium' (default) → 'xhigh'",
+          note: "{ type: 'disabled' } și budget_tokens returnează 400 la orice effort. Effort implicit e medium (un nivel sub Opus 5) — setează-l explicit pentru task-uri grele.",
         },
         {
           thinking: true,
           budget: 'mereu activ — nu se poate dezactiva',
           recommended: "omite thinking; effort: 'low' → 'max'",
-          note: 'Setarea explicită a parametrului thinking returnează 400. Chain of thought brut nu e returnat niciodată — cere display: "summarized" pentru rezumat.',
+          note: 'Doar { type: "adaptive" } sau omiterea parametrului sunt acceptate. Chain of thought brut nu e returnat niciodată — cere display: "summarized" pentru rezumat.',
         },
       ],
       noThinking: 'Nu suportă thinking',
@@ -416,43 +436,43 @@ const extremeResponse = await client.messages.create({
       recommendedLabel: 'Recomandat:',
       strategiesTitle: '10 strategii pentru cost optim',
       strategies: [
-        { n: '01', title: 'Modelul potrivit pentru fiecare task',    desc: 'Haiku pentru simplu, Sonnet pentru development, Opus pentru critic. Diferența de cost: 5×–10×.' },
+        { n: '01', title: 'Modelul potrivit pentru fiecare task',    desc: 'Haiku pentru simplu, Sonnet pentru volum, Opus 5.5 pentru munca zilnică, Fable 5.1 doar pentru extreme. Diferența de cost: până la 10×.' },
         { n: '02', title: '/compact proactiv la ~60% context',        desc: 'Comprimă conversația înainte de a ajunge la limită. Nu aștepta warning-ul — acționezi prea târziu.' },
         { n: '03', title: 'Context minimal dar suficient',            desc: 'Claude citește automat fișierele necesare. Nu paste cod în prompt — adaugă tokeni inutili.' },
         { n: '04', title: 'Specifică fișierele relevante',            desc: 'În loc de "analizează proiectul", spune "verifică lib/auth.ts". Elimini scanarea de fișiere irelevante.' },
-        { n: '05', title: 'think proportional cu complexitatea',      desc: 'think/megathink/ultrathink: 10K/32K/128K tokeni interni. Alege minimul suficient.' },
+        { n: '05', title: 'Effort proporțional cu complexitatea',     desc: '/effort low → max controlează cât gândește modelul. Păstrează medium ca default și folosește ultrathink doar pe tura care contează.' },
         { n: '06', title: 'Sesiuni curate și focusate',              desc: 'O sesiune = un task sau task-uri înrudite. Schimbările de subiect acumulează context inutil.' },
         { n: '07', title: 'CLAUDE.md concis',                         desc: 'Fiecare linie din CLAUDE.md se adaugă la fiecare request. 200 linii = 200× mai mulți tokeni de input.' },
         { n: '08', title: 'Un prompt, un obiectiv',                   desc: 'Prompturi atomice produc output mai bun cu mai puțini tokeni față de prompturi cu 5 task-uri.' },
-        { n: '09', title: 'Opus pentru decizie, Sonnet pentru cod',  desc: 'Opus analizează și recomandă (50K tokeni), Sonnet implementează (200K tokeni). Economie ~30%.' },
+        { n: '09', title: 'Opus pentru decizie, Sonnet pentru cod',  desc: 'Opus 5.5 analizează și recomandă (50K tokeni), Sonnet 5 implementează (200K tokeni). Economie ~40% — sau /model opusplan.' },
         { n: '10', title: 'Monitorizează cu /cost',                   desc: 'Rulează /cost periodic pentru a vedea consumul sesiunii. Devii conștient de pattern-urile costisitoare.' },
       ],
     },
   },
   en: {
-    badge: 'Claude 4 & 5 Family',
+    badge: 'Claude 5 Family · Sep 2026',
     title: 'Models & Pricing',
     subtitle: 'Haiku, Sonnet, Opus, Fable — four models with completely different profiles. Real prices, decision matrix, per-project configuration and full technical capabilities.',
     stats: [
-      { value: '4',    label: 'current models',      sub: 'Haiku / Sonnet / Opus / Fable 5' },
-      { value: '1M',   label: 'context window',      sub: 'all except Haiku (200K)' },
-      { value: '10×',  label: 'cost difference',     sub: 'Haiku vs Fable 5 output' },
-      { value: '90%',  label: 'tasks with Sonnet',   sub: 'everyday development' },
+      { value: '4',        label: 'current models',      sub: 'Haiku 4.5 / Sonnet 5 / Opus 5.5 / Fable 5.1' },
+      { value: '1M',       label: 'context window',      sub: 'all except Haiku (200K)' },
+      { value: '10×',      label: 'cost difference',     sub: 'Haiku vs Fable 5.1 output' },
+      { value: 'Opus 5.5', label: 'Claude Code default', sub: 'default effort: medium' },
     ],
     tabs: ['Models', 'Pricing', 'Selection', 'Configuration', 'Capabilities'],
     models: {
-      badges: ['Fast & Cheap', 'Balanced', 'Maximum Opus', 'Top of range'],
+      badges: ['Fast & Cheap', 'Fast & Capable', 'Recommended default', 'Top of range'],
       taglines: [
         'High volume, low latency, minimal cost',
-        'Optimal quality/cost ratio — recommended default',
-        'Most capable Opus — for problems that matter',
+        'Best speed/intelligence combination at half the Opus price',
+        'Claude Code default — agentic coding and knowledge work',
         'Extreme reasoning and long-horizon agents',
       ],
       descriptions: [
         'The fastest and cheapest Claude model. Optimized for high-volume tasks that don\'t require complex reasoning. Responds almost instantly — ideal for automations and real-time feedback.',
-        'Excellent balance between intelligence, speed and cost — near-Opus quality on coding. Handles 90% of development tasks. Adaptive thinking on by default, up to 128K output tokens.',
-        'The most capable Opus model — exceptional reasoning for complex, ambiguous or high-stakes problems, at $5/$25 per MTok. The standard escalation when Sonnet isn\'t enough.',
-        'The most intelligent publicly available Anthropic model. Thinking is always on (cannot be disabled), agentic sessions that run for minutes or hours autonomously. Use it for problems no other model can solve.',
+        'Excellent balance between intelligence, speed and cost, at $2/$10 per MTok. A good pick for fast sessions, high volume or subagents. Adaptive thinking on by default (can be disabled), up to 128K output tokens.',
+        'The default model in Claude Code and Anthropic\'s recommended starting point for most workloads. Cheaper than previous Opus models ($4/$20 per MTok), thinking always on, default effort medium.',
+        'The most capable publicly available Anthropic model. Thinking is always on (cannot be disabled), agentic sessions that run for minutes or hours autonomously. Use it when Opus 5.5 at high effort still falls short.',
       ],
       bestFor: [
         [
@@ -463,18 +483,18 @@ const extremeResponse = await client.messages.create({
           'Prototyping and rapid iterations',
         ],
         [
-          'Day-to-day development',
-          'New features of medium complexity',
-          'Code review and debugging',
-          'Moderate refactoring (2-5 files)',
+          'Fast, budget-conscious sessions',
+          'Features of medium complexity',
+          'Subagents and parallel tasks',
           'Generating unit and integration tests',
+          'High volume via API / Batch',
         ],
         [
-          'Major architectural redesign',
-          'Complex migrations (REST → tRPC, etc.)',
+          'Day-to-day development (default)',
+          'Complex features and multi-file refactoring',
           'Critical production debugging without repro',
+          'Architectural redesign and migrations',
           'Security audits and risk analysis',
-          'High-impact business decisions',
         ],
         [
           'Autonomous long-horizon agents (hours of work)',
@@ -493,59 +513,58 @@ const extremeResponse = await client.messages.create({
         ],
         [
           'Trivial repetitive tasks → use Haiku',
-          'Complete architectural redesign',
-          'Critical problems with extreme ambiguity',
+          'Ambiguous problems where Opus makes the difference',
+          'Critical long-horizon agents',
         ],
         [
           'Simple code completion → Haiku',
-          'Daily development → Sonnet',
-          'Exploration and prototyping sessions',
-          'Boilerplate generation',
+          'High-volume CI pipelines → Haiku / Sonnet',
+          'Problems it failed on even at xhigh → Fable 5.1',
+          'Reflexive max effort — medium is the right default',
         ],
         [
-          'Daily development → Sonnet 5',
-          'Routine tasks — double the cost of Opus',
+          'Daily development → Opus 5.5',
+          'Routine tasks — 2.5× the cost of Opus 5.5',
           'Quick answers — turns can take minutes',
           'Organizations with zero data retention',
         ],
       ],
       examples: [
         `# Enable in Claude Code:
-claude --model claude-haiku-4-5
+claude --model haiku
 
 # Or in .claude/settings.json:
-{ "model": "claude-haiku-4-5" }
+{ "model": "haiku" }
 
 # Ideal for:
 > Generate getters for
   the UserProfile.ts interface
 > Explain in 2 lines what
   this function does.`,
-        `# Default in Claude Code:
-claude  # Sonnet automatically
-
-# Explicit:
-claude --model claude-sonnet-5
+        `# Enable:
+claude --model sonnet
+# or full ID: claude-sonnet-5
 
 # Ideal for:
 > Implement cursor-based pagination
   in lib/api.ts
-> think Refactor AuthContext
-  to eliminate prop drilling.`,
-        `# Enable:
-claude --model claude-opus-4-8
+> Write Vitest tests for every
+  function in lib/cart.ts`,
+        `# Default in Claude Code:
+claude  # Opus 5.5 automatically
 
-# Or mid-session:
+# Explicit / mid-session:
+claude --model opus
 > /model opus
 
 # Ideal for:
-> ultrathink Migrate authentication
-  from cookies to stateless JWT,
-  keeping active sessions intact.
-> Analyze the security implications
-  of this migration.`,
+> /effort xhigh
+> Migrate authentication from
+  cookies to stateless JWT,
+  keeping active sessions intact.`,
         `# Enable:
-claude --model claude-fable-5
+claude --model fable
+# or: /model best (fable where available)
 
 # Ideal for:
 > Run autonomously: migrate the
@@ -558,7 +577,7 @@ claude --model claude-fable-5
     },
     tabModele: {
       title: 'Current Claude models',
-      desc: 'Four models with distinct profiles — they are not variants of the same model. Each is optimized for a different class of problems. Claude Fable 5 is the top of the range: the first model in the Claude 5 family, built for extreme reasoning and long-horizon agents.',
+      desc: 'Four models with distinct profiles — they are not variants of the same model. Anthropic recommends Claude Opus 5.5 as the starting point for most workloads (and it is the Claude Code default); Claude Fable 5.1 is the top of the range, for extreme reasoning and long-horizon agents.',
       barLabels: ['Intelligence', 'Speed', 'Relative cost'],
       idealFor: 'Ideal for',
       notFor: "Don't use for",
@@ -574,9 +593,9 @@ claude --model claude-fable-5
     },
     tabPreturi: {
       title: 'Real prices and costs',
-      desc: 'Prices are per million tokens (MTok). With prompt caching active, input cost drops to ~10% — essential for long sessions with a consistent CLAUDE.md.',
+      desc: 'Prices are per million tokens (MTok). A cache read costs 10% of input (5% on Opus 5.5, 2.5% on Fable 5.1) — essential for long sessions with a consistent CLAUDE.md. Batch API: −50% on input and output.',
       thContext: 'Context',
-      footnote: '* Approximate prices per million tokens (MTok) — check anthropic.com/pricing for current values.',
+      footnote: '* Claude API (first-party) prices checked in Sep 2026 — cache write = 5-minute write. Check platform.claude.com/docs/en/about-claude/pricing for current values.',
       costTitle: 'Cost difference per typical task',
       tasks: [
         'Explain a simple function (~2K tok)',
@@ -587,22 +606,22 @@ claude --model claude-fable-5
       ],
       tipContent: (
         <>
-          <strong className="text-green-300">Opus + Sonnet strategy:</strong> Use Opus for <em>design and decisions</em> (50K tokens), Sonnet for <em>implementation</em> (200K tokens). Total cost: ~$4.25 vs ~$6.25 with Opus for everything — ~30% savings, more if you only escalate the decision to Fable 5.
+          <strong className="text-green-300">Opus + Sonnet strategy:</strong> Opus 5.5 for <em>design and decisions</em> (50K tokens), Sonnet 5 for <em>implementation</em> (200K tokens). Total cost: ~$3.00 vs ~$5.00 with Opus for everything — ~40% savings. Often simpler: stay on Opus 5.5 and lower effort to medium/low for the routine part.
         </>
       ),
       cacheTitle: 'Prompt caching impact on long sessions',
-      cacheDesc: 'In a typical session with a 2K token CLAUDE.md and 30 messages, caching reduces input cost by ~60%.',
-      noCache: 'Without caching — 30 Sonnet messages',
-      withCache: 'With caching active — 30 Sonnet messages',
+      cacheDesc: 'In a typical session with a 2K token CLAUDE.md and 30 messages on Opus 5.5 (the default), caching reduces input cost by ~75%.',
+      noCache: 'Without caching — 30 Opus 5.5 messages',
+      withCache: 'With caching active — 30 Opus 5.5 messages',
       noCacheRows: [
         ['CLAUDE.md × 30 requests (2K × 30)', '60K input tokens'],
         ['System prompt × 30', '90K tokens'],
         ['Conversation (avg 1K/message)', '30K tokens'],
       ],
       withCacheRows: [
-        ['Cache read (CLAUDE.md + system)', '150K × $0.30'],
-        ['Cache write (first time)', '5K × $3.75'],
-        ['New conversation', '30K × $3.00'],
+        ['Cache read (CLAUDE.md + system)', '150K × $0.20'],
+        ['Cache write (first time)', '5K × $5.00'],
+        ['New conversation', '30K × $4.00'],
       ],
       totalInput: 'Total input cost',
       infoContent: 'Claude Code automatically activates prompt caching for CLAUDE.md and system prompt. No configuration needed — it works implicitly every session.',
@@ -610,53 +629,57 @@ claude --model claude-fable-5
     },
     tabSelectare: {
       title: 'When to use which model',
-      desc: 'The basic rule: start with Sonnet (default), escalate to Opus when Sonnet isn\'t enough, and drop to Haiku for mechanical or high-volume tasks.',
+      desc: 'The basic rule in 2026: start with Opus 5.5 (default, effort medium), drop to Sonnet 5 or Haiku for speed, volume or cost, and move up to Fable 5.1 only when Opus at high effort is not enough. Before switching models, try adjusting effort.',
       decisionTitle: 'Quick decision guide',
       qas: [
         { q: 'Code completion, boilerplate, getter/setter, docstrings?',    a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
         { q: 'Quick explanation of a code block?',                          a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
         { q: 'CI automation with hundreds of files processed?',             a: 'Haiku',  color: 'text-green-400',  bg: 'border-green-500/20 bg-green-500/5' },
-        { q: 'Bug fix with clear stack trace, 1-2 files?',                 a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'New feature of medium complexity?',                           a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Refactoring 2-5 files with clear logic?',                    a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Code review focused on security or performance?',             a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
-        { q: 'Sonnet failed or the answer is too vague?',                   a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
+        { q: 'Bug fix with clear stack trace, want it fast and cheap?',     a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'Subagents reading lots of code in parallel?',                 a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'Generating tests for an existing module?',                    a: 'Sonnet', color: 'text-amber-400',  bg: 'border-amber-500/20 bg-amber-500/5' },
+        { q: 'New feature, refactoring, code review — daily work?',         a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Architectural redesign or stack migration?',                  a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Critical production bug without clear reproduction?',         a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
         { q: 'Full security audit of a critical module?',                   a: 'Opus',   color: 'text-purple-400', bg: 'border-purple-500/20 bg-purple-500/5' },
-        { q: 'Long-horizon agent or a problem Opus failed on?',             a: 'Fable 5', color: 'text-rose-400',  bg: 'border-rose-500/20 bg-rose-500/5' },
+        { q: 'Opus 5.5 failed even at xhigh effort?',                       a: 'Fable 5.1', color: 'text-rose-400', bg: 'border-rose-500/20 bg-rose-500/5' },
+        { q: 'Autonomous agent working for hours?',                         a: 'Fable 5.1', color: 'text-rose-400', bg: 'border-rose-500/20 bg-rose-500/5' },
       ],
       matrixTitle: 'Full matrix — scenarios vs models',
       matrixColScenario: 'Scenario',
       matrixRows: [
-        ['Code completion / boilerplate',       '✓ Ideal',      '✓ Works',      '✗ Overkill'],
-        ['Bug with clear stack trace',          '○ Works',      '✓ Ideal',      '✗ Overkill'],
-        ['Moderate feature (1-3 files)',        '✗ Weak',       '✓ Ideal',      '○ Unused'],
-        ['Complex multi-file refactoring',      '✗ Weak',       '✓ Good',       '○ Escalate'],
+        ['Code completion / boilerplate',       '✓ Ideal',      '✓ Works',      '○ Overkill'],
+        ['Bug with clear stack trace',          '○ Works',      '✓ Ideal',      '✓ Good'],
+        ['Moderate feature (1-3 files)',        '✗ Weak',       '✓ Good',       '✓ Ideal'],
+        ['Complex multi-file refactoring',      '✗ Weak',       '○ Works',      '✓ Ideal'],
         ['New architectural design',            '✗ No',         '○ Partial',    '✓ Ideal'],
-        ['Framework / stack migration',         '✗ No',         '✗ Not enough', '✓ Ideal'],
-        ['Security code review',                '✗ Weak',       '✓ Good',       '○ Critical audit'],
-        ['CI pipeline / volume automation',     '✓ Ideal',      '○ Too costly', '✗ No'],
-        ['Unit test generation',                '○ Simple',     '✓ Ideal',      '✗ Overkill'],
+        ['Framework / stack migration',         '✗ No',         '○ Partial',    '✓ Ideal'],
+        ['Security code review',                '✗ Weak',       '✓ Good',       '✓ Ideal'],
+        ['CI pipeline / volume automation',     '✓ Ideal',      '✓ Good',       '○ Too costly'],
+        ['Unit test generation',                '○ Simple',     '✓ Ideal',      '✓ Good'],
         ['Production debug without repro',      '✗ No',         '○ Try it',     '✓ Ideal'],
       ],
       escalTitle: 'Escalation strategy',
-      escalDesc: "Don't go straight to Opus — test with Sonnet first. If Sonnet fails, escalate with the same accumulated context. The savings are significant.",
-      escalCode: `# Step 1 — try with Sonnet (default)
-> megathink Debugging a race condition
-  in the notification system.
+      escalDesc: 'The first step is not switching models but raising effort. On Opus 5.5 go from medium to xhigh; only if it still does not converge, move to Fable 5.1 — with the same accumulated context.',
+      escalCode: `# Step 1 — Opus 5.5 on default (effort medium)
+> Debugging a race condition in the
+  notification system.
   Files: lib/notifications.ts, workers/notify.ts
 
-# If Sonnet didn't converge on a clear solution:
-> /model opus
-> Continue the analysis — we're stuck on
-  the race condition in NotificationQueue.
-  Sonnet's solution was incorrect because [X].
+# Not converging? Raise effort, not the model:
+> /effort xhigh
+> Continue the analysis — the solution above is
+  wrong because [X]. Check the event ordering
+  in NotificationQueue.
 
-# Opus solves it. Do the implementation with Sonnet:
-> /model sonnet
-> Implement the solution proposed above.
-  Context is complete — write the code.`,
+# Still stuck? Escalate to Fable 5.1:
+> /model fable
+> Continue from where we left off.
+
+# Solved. Routine implementation — back down:
+> /model opus
+> /effort medium
+> Implement the solution proposed above.`,
       tipContent: (
         <>
           When switching models mid-session, the conversation context (all messages, files read) is <strong className="text-green-300">fully preserved</strong>. You don't lose progress — you only switch compute power.
@@ -664,107 +687,122 @@ claude --model claude-fable-5
       ),
       switchTitle: 'Switching model mid-session',
       switchLabel1: 'Available commands',
-      switchLabel2: 'Recommended Opus → Sonnet flow',
+      switchLabel2: 'Opus → Sonnet flow (optional)',
       switchCode1: `# From the prompt, at any time:
-> /model opus
-> /model sonnet
-> /model haiku
+> /model opus      # Opus 5.5
+> /model sonnet    # Sonnet 5
+> /model haiku     # Haiku 4.5
+> /model fable     # Fable 5.1
+> /model opusplan  # Opus in plan mode, Sonnet for execution
 
-# With full ID:
-> /model claude-opus-4-8
+# /model <name> saves the choice as your default.
+# This session only: /model → press "s"
 
 # Check active model:
 > /status
 
-# Or via flag at launch:
-claude --model claude-opus-4-8`,
-      switchCode2: `# Opus for DECISION (costly, short):
+# Or via flag at launch (that session only):
+claude --model opus`,
+      switchCode2: `# Opus for DECISION (short):
 /model opus
 > ultrathink What is the best
   architecture for system X?
   Analyze 3 options.
 
-# Sonnet for IMPLEMENTATION (cheap, long):
+# Sonnet for IMPLEMENTATION (long, ~2× cheaper):
 /model sonnet
 > Implement option 2 as proposed.
-  Respect the constraints from the plan.`,
+  Respect the constraints from the plan.
+
+# Automatic: /model opusplan does exactly this.`,
     },
     tabConfigurare: {
       title: 'Model configuration',
-      desc: 'You can set the model at four levels: CLI flag (session), settings.json (project), environment variable (global) or API (programmatic). Each level overrides the previous one.',
+      desc: 'You can set the model at several levels: settings.json (persistent), environment variable, CLI flag or /model in a session. The more specific level overrides the general one. Effort is configured separately, with the same logic.',
       priorityTitle: 'Configuration priority (ascending)',
       priorities: [
-        { level: '4 — Lowest',          label: 'Hardcoded default',      val: 'claude-sonnet-5',                        color: 'border-zinc-700 bg-zinc-800/30',      badge: 'text-zinc-500'  },
-        { level: '3',                    label: 'Environment variable',    val: 'ANTHROPIC_MODEL=claude-sonnet-5',        color: 'border-blue-500/20 bg-blue-500/5',   badge: 'text-blue-400'  },
-        { level: '2',                    label: '.claude/settings.json',   val: '{ "model": "claude-opus-4-8" }',           color: 'border-amber-500/20 bg-amber-500/5', badge: 'text-amber-400' },
-        { level: '1 — Highest priority', label: 'CLI flag --model',        val: 'claude --model claude-haiku-4-5', color: 'border-purple-500/20 bg-purple-500/5',badge: 'text-purple-400'},
+        { level: '4 — Lowest',          label: 'Account / plan default', val: 'Opus 5.5 (Pro, Max, Team, Enterprise, API)', color: 'border-zinc-700 bg-zinc-800/30',      badge: 'text-zinc-500'  },
+        { level: '3',                    label: 'settings.json',          val: '{ "model": "opus" }',                        color: 'border-amber-500/20 bg-amber-500/5', badge: 'text-amber-400' },
+        { level: '2',                    label: 'Environment variable',   val: 'ANTHROPIC_MODEL=sonnet',                     color: 'border-blue-500/20 bg-blue-500/5',   badge: 'text-blue-400'  },
+        { level: '1 — Highest priority', label: '--model / /model',       val: 'claude --model haiku',                       color: 'border-purple-500/20 bg-purple-500/5', badge: 'text-purple-400'},
       ],
       settingsTitle: '.claude/settings.json',
-      settingsDesc: 'Configured per project, versioned in repo. Applies to all sessions in that directory.',
+      settingsDesc: 'Configured per project, versioned in repo. Applies to all sessions in that directory. You can use aliases (opus, sonnet, haiku, fable) — they automatically track the newest version.',
       settingsCode: `// .claude/settings.json
 {
-  "model": "claude-sonnet-5",
+  "model": "opus",
+
+  // Default effort + per-model override (optional):
+  "effortLevel": "medium",
+  "modelSettings": {
+    "opus": { "effort": "high" }
+  },
 
   // Tool permissions (optional):
   "permissions": {
     "allow": ["Bash(npm run *)", "Edit", "Read"],
     "deny": ["Bash(rm -rf *)"]
-  },
-
-  // Auto-approval level (optional):
-  "autoApprove": ["Read", "Glob", "Grep"]
+  }
 }`,
       infoContent: (
         <>
-          <code className="text-blue-300">.claude/settings.json</code> is versioned in git — the whole team gets the same default model for the project. Ideal for setting Haiku in CI pipelines and Sonnet in development.
+          <code className="text-blue-300">.claude/settings.json</code> is versioned in git — the whole team gets the same default model for the project. Note: <code className="text-blue-300">/model</code> writes your choice to your user settings, so it becomes the default for new sessions.
         </>
       ),
       envTitle: 'Environment variables',
-      envCode: `# ~/.bashrc or ~/.zshrc — personal global model:
-export ANTHROPIC_MODEL="claude-sonnet-5"
+      envCode: `# Model for the launched session:
+ANTHROPIC_MODEL=haiku claude -p "..."
 
-# Or per terminal session:
-ANTHROPIC_MODEL=claude-haiku-4-5 claude -p "..."
+# Which model each alias resolves to:
+export ANTHROPIC_DEFAULT_OPUS_MODEL="claude-opus-5-5"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="claude-sonnet-5"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="claude-haiku-4-5"
+export ANTHROPIC_DEFAULT_FABLE_MODEL="claude-fable-5-1"
+
+# Default model for subagents:
+export CLAUDE_CODE_SUBAGENT_MODEL="sonnet"
+
+# Global effort (overrides /effort and settings):
+export CLAUDE_CODE_EFFORT_LEVEL="medium"
 
 # In CI/CD (GitHub Actions):
 env:
-  ANTHROPIC_MODEL: claude-haiku-4-5
+  ANTHROPIC_MODEL: haiku
   ANTHROPIC_API_KEY: \${{ secrets.ANTHROPIC_API_KEY }}`,
       apiTitle: 'Model selection in Anthropic SDK',
-      apiDesc: 'If you build with the API directly, model is a simple parameter. Combine with extended thinking for full control.',
+      apiDesc: 'If you build with the API directly, model is a simple parameter. You control reasoning depth via output_config.effort.',
       apiCode: `import Anthropic from '@anthropic-ai/sdk'
 
 const client = new Anthropic()
 
-// Haiku — fast completion, minimal cost
+// Haiku 4.5 — fast completion, minimal cost
 const quickResponse = await client.messages.create({
   model: 'claude-haiku-4-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: promptSimple }],
 })
 
-// Sonnet — standard development with adaptive thinking
+// Sonnet 5 — fast and cheap, adaptive thinking by default
 const devResponse = await client.messages.create({
   model: 'claude-sonnet-5',
   max_tokens: 16000,
-  thinking: { type: 'adaptive' },
   output_config: { effort: 'high' },
   messages: [{ role: 'user', content: promptComplex }],
 })
 
-// Opus — architectural decision (max effort)
+// Opus 5.5 — recommended default. Thinking always on;
+// default effort 'medium' — set it explicitly when it matters.
 const archResponse = await client.messages.create({
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5-5',
   max_tokens: 16000,
-  thinking: { type: 'adaptive' },
   output_config: { effort: 'xhigh' },
   messages: [{ role: 'user', content: promptCritic }],
 })
 
-// Fable 5 — extreme problems. Thinking is always on:
-// omit the parameter (setting it explicitly returns 400).
+// Fable 5.1 — extreme problems. Thinking always on:
+// omit the thinking parameter ('disabled' returns 400).
 const extremeResponse = await client.messages.create({
-  model: 'claude-fable-5',
+  model: 'claude-fable-5-1',
   max_tokens: 16000,
   output_config: { effort: 'xhigh' },
   messages: [{ role: 'user', content: promptExtreme }],
@@ -773,36 +811,38 @@ const extremeResponse = await client.messages.create({
       strats: [
         {
           ctx: 'Local development',
-          where: '.claude/settings.json',
-          rationale: 'Most balanced for daily tasks. You can escalate to Opus from within the session.',
+          where: 'default or .claude/settings.json',
+          rationale: 'Opus 5.5 on medium effort covers daily work. Raise effort from within the session when a problem gets hard.',
         },
         {
           ctx: 'CI/CD pipelines',
           where: 'ENV var in CI config',
-          rationale: 'Runs on hundreds of files on every push. Haiku reduces cost by 5-10× vs Sonnet.',
+          rationale: 'Runs on hundreds of files on every push. Haiku output costs 4× less than Opus 5.5.',
         },
         {
-          ctx: 'Architecture session',
-          where: '--model flag or /model opus',
-          rationale: 'Dedicated session for big decisions. Switch back to Sonnet for implementation.',
+          ctx: 'Heavy agentic session',
+          where: '--model fable or /model fable',
+          rationale: 'For hours-long tasks or problems Opus fails on. Switch back to Opus for routine implementation.',
         },
       ],
     },
     tabCapabilitati: {
       title: 'Capabilities and limitations per model',
-      desc: 'Beyond intelligence and cost, models differ in concrete technical capabilities — context window, extended thinking, tool use, max output.',
+      desc: 'Beyond intelligence and cost, models differ in concrete technical capabilities — context window, thinking, effort, max output.',
       thCap: 'Capability',
       capRows: [
         { cap: 'Context window',           h: '200K tokens', s: '1M tokens',   o: '1M tokens', f: '1M tokens' },
         { cap: 'Max output tokens',         h: '64K',         s: '128K',        o: '128K',      f: '128K' },
-        { cap: 'Thinking',                  h: '✓ budget_tokens', s: '✓ adaptive + effort', o: '✓ adaptive + effort', f: '✓ always on' },
+        { cap: 'Thinking',                  h: '✓ budget_tokens', s: '✓ adaptive', o: '✓ always on', f: '✓ always on' },
+        { cap: 'Default effort',            h: '—',           s: 'high',        o: 'medium',    f: 'high' },
+        { cap: 'Knowledge cutoff',          h: 'Feb 2025',    s: 'Jan 2026',    o: 'Jun 2026',  f: 'Jun 2026' },
         { cap: 'Tool use (Bash, Read etc)', h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Vision (images)',           h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Streaming',                 h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Prompt caching',            h: '✓',           s: '✓',           o: '✓',         f: '✓' },
         { cap: 'Batch API',                 h: '✓',           s: '✓',           o: '✓',         f: '✓' },
-        { cap: 'Avg latency',               h: '~1-3s',       s: '~5-15s',      o: '~15-60s',   f: 'minutes on hard tasks' },
-        { cap: 'Rate limit (default RPM)',  h: 'High',        s: 'Medium',      o: 'Low',       f: 'Low' },
+        { cap: 'Relative latency',          h: 'Lowest',      s: 'Low',         o: 'Moderate',  f: 'High — minutes on hard tasks' },
+        { cap: 'Fast mode (API)',           h: '✗',           s: '✗',           o: '✓ $8/$40',  f: '✗' },
       ],
       thinkingTitle: 'Thinking — details per model',
       thinkingModels: [
@@ -814,21 +854,21 @@ const extremeResponse = await client.messages.create({
         },
         {
           thinking: true,
-          budget: 'adaptive — the model decides',
+          budget: 'adaptive — can be disabled',
           recommended: "effort: 'high' (default) / 'xhigh'",
-          note: 'Adaptive thinking is on by default. budget_tokens returns a 400 error — control depth via output_config.effort (low → max).',
+          note: 'Adaptive thinking is on by default. budget_tokens returns a 400 — control depth via output_config.effort (low → max).',
         },
         {
           thinking: true,
-          budget: 'adaptive — the model decides',
-          recommended: "effort: 'xhigh' for coding/agentic",
-          note: "Maximum reasoning in the Opus tier. effort xhigh is Claude Code's default.",
+          budget: 'always on — cannot be disabled',
+          recommended: "effort: 'medium' (default) → 'xhigh'",
+          note: "{ type: 'disabled' } and budget_tokens return a 400 at any effort. Default effort is medium (one level below Opus 5) — set it explicitly for hard tasks.",
         },
         {
           thinking: true,
           budget: 'always on — cannot be disabled',
           recommended: "omit thinking; effort: 'low' → 'max'",
-          note: 'Setting the thinking parameter explicitly returns a 400. The raw chain of thought is never returned — request display: "summarized" for a summary.',
+          note: 'Only { type: "adaptive" } or omitting the parameter are accepted. The raw chain of thought is never returned — request display: "summarized" for a summary.',
         },
       ],
       noThinking: "Doesn't support thinking",
@@ -836,15 +876,15 @@ const extremeResponse = await client.messages.create({
       recommendedLabel: 'Recommended:',
       strategiesTitle: '10 strategies for optimal cost',
       strategies: [
-        { n: '01', title: 'Right model for each task',          desc: 'Haiku for simple, Sonnet for development, Opus for critical. Cost difference: 5×–10×.' },
+        { n: '01', title: 'Right model for each task',          desc: 'Haiku for simple, Sonnet for volume, Opus 5.5 for daily work, Fable 5.1 only for extremes. Cost difference: up to 10×.' },
         { n: '02', title: '/compact proactively at ~60% context', desc: 'Compress the conversation before hitting the limit. Don\'t wait for the warning — you act too late.' },
         { n: '03', title: 'Minimal but sufficient context',      desc: 'Claude reads needed files automatically. Don\'t paste code in the prompt — it adds useless tokens.' },
         { n: '04', title: 'Specify relevant files',             desc: 'Instead of "analyze the project", say "check lib/auth.ts". You eliminate scanning irrelevant files.' },
-        { n: '05', title: 'think proportional to complexity',   desc: 'think/megathink/ultrathink: 10K/32K/128K internal tokens. Choose the minimum that\'s sufficient.' },
+        { n: '05', title: 'Effort proportional to complexity',  desc: '/effort low → max controls how much the model thinks. Keep medium as the default and use ultrathink only on the turn that matters.' },
         { n: '06', title: 'Clean and focused sessions',         desc: 'One session = one task or related tasks. Topic changes accumulate useless context.' },
         { n: '07', title: 'Concise CLAUDE.md',                  desc: 'Every line in CLAUDE.md is added to every request. 200 lines = 200× more input tokens.' },
         { n: '08', title: 'One prompt, one goal',               desc: 'Atomic prompts produce better output with fewer tokens than prompts with 5 tasks.' },
-        { n: '09', title: 'Opus for decisions, Sonnet for code', desc: 'Opus analyzes and recommends (50K tokens), Sonnet implements (200K tokens). ~30% savings.' },
+        { n: '09', title: 'Opus for decisions, Sonnet for code', desc: 'Opus 5.5 analyzes and recommends (50K tokens), Sonnet 5 implements (200K tokens). ~40% savings — or /model opusplan.' },
         { n: '10', title: 'Monitor with /cost',                 desc: 'Run /cost periodically to see session consumption. You become aware of costly patterns.' },
       ],
     },
@@ -918,28 +958,28 @@ const MODELS: ModelData[] = [
     id: 'claude-sonnet-5',
     icon: <Cpu className="h-5 w-5" />,
     color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20',
-    intelligence: 85, speed: 75, costRel: 30,
-    inputCost: '$3.00', outputCost: '$15.00', cacheRead: '$0.30', cacheWrite: '$3.75',
+    intelligence: 85, speed: 75, costRel: 20,
+    inputCost: '$2.00', outputCost: '$10.00', cacheRead: '$0.20', cacheWrite: '$2.50',
     context: '1M', maxOutput: '128K',
     thinking: true,
   },
   {
-    name: 'Claude Opus 4.8',
-    id: 'claude-opus-4-8',
+    name: 'Claude Opus 5.5',
+    id: 'claude-opus-5-5',
     icon: <Brain className="h-5 w-5" />,
     color: 'text-purple-400', bg: 'bg-purple-500/10', border: 'border-purple-500/20',
-    intelligence: 95, speed: 50, costRel: 50,
-    inputCost: '$5.00', outputCost: '$25.00', cacheRead: '$0.50', cacheWrite: '$6.25',
+    intelligence: 95, speed: 55, costRel: 40,
+    inputCost: '$4.00', outputCost: '$20.00', cacheRead: '$0.20', cacheWrite: '$5.00',
     context: '1M', maxOutput: '128K',
     thinking: true,
   },
   {
-    name: 'Claude Fable 5',
-    id: 'claude-fable-5',
+    name: 'Claude Fable 5.1',
+    id: 'claude-fable-5-1',
     icon: <Sparkles className="h-5 w-5" />,
     color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20',
     intelligence: 100, speed: 40, costRel: 100,
-    inputCost: '$10.00', outputCost: '$50.00', cacheRead: '$1.00', cacheWrite: '$12.50',
+    inputCost: '$10.00', outputCost: '$50.00', cacheRead: '$0.25', cacheWrite: '$12.50',
     context: '1M', maxOutput: '128K',
     thinking: true,
   },
@@ -1044,8 +1084,8 @@ function TabModele() {
         <div className="space-y-4">
           {[
             { label: cm.compRows[0], vals: [55, 85, 95, 100], colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
-            { label: cm.compRows[1], vals: [100, 75, 50, 40],  colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
-            { label: cm.compRows[2], vals: [10, 30, 50, 100],  colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
+            { label: cm.compRows[1], vals: [100, 75, 55, 40],  colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
+            { label: cm.compRows[2], vals: [10, 20, 40, 100],  colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
             { label: cm.compRows[3], vals: [50, 100, 100, 100], colors: ['bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500'] },
           ].map((r) => (
             <div key={r.label}>
@@ -1065,8 +1105,8 @@ function TabModele() {
           <div className="mt-2 flex flex-wrap gap-6 text-xs">
             <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-green-500" />Haiku 4.5</span>
             <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-amber-500" />Sonnet 5</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-purple-500" />Opus 4.8</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-rose-500" />Fable 5</span>
+            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-purple-500" />Opus 5.5</span>
+            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-rose-500" />Fable 5.1</span>
           </div>
         </div>
       </div>
@@ -1130,16 +1170,16 @@ function TabPreturi() {
                 <th className="px-4 py-3 text-center font-semibold text-green-400">Haiku</th>
                 <th className="px-4 py-3 text-center font-semibold text-amber-400">Sonnet</th>
                 <th className="px-4 py-3 text-center font-semibold text-purple-400">Opus</th>
-                <th className="px-4 py-3 text-center font-semibold text-rose-400">Fable 5</th>
+                <th className="px-4 py-3 text-center font-semibold text-rose-400">Fable 5.1</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800/50">
               {[
-                { haiku: '~$0.001', sonnet: '~$0.007', opus: '~$0.012', fable: '~$0.024' },
-                { haiku: '~$0.004', sonnet: '~$0.015', opus: '~$0.025', fable: '~$0.050' },
-                { haiku: '~$0.013', sonnet: '~$0.050', opus: '~$0.085', fable: '~$0.170' },
-                { haiku: '~$0.031', sonnet: '~$0.125', opus: '~$0.210', fable: '~$0.420' },
-                { haiku: '~$0.094', sonnet: '~$0.375', opus: '~$0.625', fable: '~$1.250' },
+                { haiku: '~$0.001', sonnet: '~$0.005', opus: '~$0.010', fable: '~$0.024' },
+                { haiku: '~$0.004', sonnet: '~$0.010', opus: '~$0.020', fable: '~$0.050' },
+                { haiku: '~$0.013', sonnet: '~$0.033', opus: '~$0.068', fable: '~$0.170' },
+                { haiku: '~$0.031', sonnet: '~$0.083', opus: '~$0.168', fable: '~$0.420' },
+                { haiku: '~$0.094', sonnet: '~$0.250', opus: '~$0.500', fable: '~$1.250' },
               ].map((r, i) => (
                 <tr key={i} className="bg-zinc-950 hover:bg-zinc-900/30 transition-colors">
                   <td className="px-4 py-3 text-xs text-zinc-300">{cp.tasks[i]}</td>
@@ -1168,7 +1208,7 @@ function TabPreturi() {
               ))}
               <div className="mt-2 flex justify-between border-t border-zinc-700 pt-2 font-semibold">
                 <span className="text-zinc-300">{cp.totalInput}</span>
-                <span className="text-red-400">~$0.54</span>
+                <span className="text-red-400">~$0.72</span>
               </div>
             </div>
           </div>
@@ -1335,9 +1375,9 @@ function TabConfigurare() {
         <h3 className="mb-4 text-lg font-semibold text-white">{cc.stratTitle}</h3>
         <div className="grid gap-3 sm:grid-cols-3">
           {[
-            { ...cc.strats[0], model: 'claude-sonnet-5',            color: 'border-amber-500/20 bg-amber-500/5',  mc: 'text-amber-400'  },
+            { ...cc.strats[0], model: 'claude-opus-5-5',            color: 'border-purple-500/20 bg-purple-500/5', mc: 'text-purple-400' },
             { ...cc.strats[1], model: 'claude-haiku-4-5',    color: 'border-green-500/20 bg-green-500/5',  mc: 'text-green-400'  },
-            { ...cc.strats[2], model: 'claude-opus-4-8',              color: 'border-purple-500/20 bg-purple-500/5',mc: 'text-purple-400' },
+            { ...cc.strats[2], model: 'claude-fable-5-1',             color: 'border-rose-500/20 bg-rose-500/5',    mc: 'text-rose-400'   },
           ].map((r) => (
             <div key={r.ctx} className={`rounded-xl border ${r.color} p-4`}>
               <div className="mb-1 font-semibold text-white">{r.ctx}</div>
@@ -1358,7 +1398,7 @@ function TabCapabilitati() {
   const c = CONTENT[lang]
   const ck = c.tabCapabilitati
 
-  const thinkingModelNames = ['Haiku 4.5', 'Sonnet 5', 'Opus 4.8', 'Fable 5']
+  const thinkingModelNames = ['Haiku 4.5', 'Sonnet 5', 'Opus 5.5', 'Fable 5.1']
   const thinkingModelColors = [
     { color: 'border-zinc-700 bg-zinc-800/30',      tc: 'text-zinc-500'  },
     { color: 'border-amber-500/20 bg-amber-500/5',  tc: 'text-amber-400' },
@@ -1381,8 +1421,8 @@ function TabCapabilitati() {
               <th className="px-4 py-3 text-left font-semibold text-zinc-400">{ck.thCap}</th>
               <th className="px-4 py-3 text-center font-semibold text-green-400">Haiku 4.5</th>
               <th className="px-4 py-3 text-center font-semibold text-amber-400">Sonnet 5</th>
-              <th className="px-4 py-3 text-center font-semibold text-purple-400">Opus 4.8</th>
-              <th className="px-4 py-3 text-center font-semibold text-rose-400">Fable 5</th>
+              <th className="px-4 py-3 text-center font-semibold text-purple-400">Opus 5.5</th>
+              <th className="px-4 py-3 text-center font-semibold text-rose-400">Fable 5.1</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800/50">

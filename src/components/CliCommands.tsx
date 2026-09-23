@@ -159,8 +159,8 @@ const CONTENT = {
           code: '> /review\n> # Adresezi problemele găsite\n> /compact    # dacă sesiunea e lungă\n> "git commit -m fix(auth): ..."',
         },
         {
-          label: 'Debug cu model mai puternic',
-          code: '> /model claude-opus-4-8\n> "megathink: de ce eșuează testele pe CI?"\n> /model claude-sonnet-5  # revin',
+          label: 'Debug cu mai mult raționament',
+          code: '> /effort xhigh\n> "De ce eșuează testele pe CI?"\n> /model fable   # doar dacă tot nu converge\n> /effort medium # revin la nivelul economic',
         },
       ] as PatternItem[],
     },
@@ -168,7 +168,7 @@ const CONTENT = {
       syntaxTitle: 'CLI flags — sintaxa generală',
       syntaxCode: `claude [flags] [prompt]
 claude -p "prompt" --output-format json
-claude --model claude-opus-4-8 --verbose
+claude --model opus --effort high --verbose
 claude -c "continuă task-ul"
 
 # Verifică lista completă cu:
@@ -495,9 +495,15 @@ RFC 5322 pentru validare completă.`,
       // tools
       {
         cmd: '/model', args: '[model-id]', desc: 'Vizualizează sau schimbă modelul activ',
-        detail: 'Fără argument: afișează modelul curent și alternativele disponibile. Cu argument: comutare instantanee în sesiune, fără a modifica settings.json.',
+        detail: 'Fără argument: deschide picker-ul (Enter = salvează ca default, s = doar sesiunea curentă). Cu argument (alias sau ID): comută și salvează alegerea ca default pentru sesiunile noi. Alias-uri: opus, sonnet, haiku, fable, best, opusplan.',
         cat: 'tools',
-        example: '> /model claude-opus-4-8\nSchimbat: claude-sonnet-5 → claude-opus-4-8\nCost: ↑1,7× input · ↑1,7× output',
+        example: '> /model sonnet\nSchimbat: Opus 5.5 → Sonnet 5\nCost: ↓2× input · ↓2× output',
+      },
+      {
+        cmd: '/effort', args: '[low|medium|high|xhigh|max|auto]', desc: 'Setează cât de mult gândește modelul',
+        detail: 'Fără argument: slider interactiv. Cu argument: setează nivelul direct; auto revine la default-ul modelului (medium pe Opus 5.5, high pe Sonnet 5 / Fable 5.1). Merge și în timp ce Claude lucrează — se aplică de la următoarea cerere.',
+        cat: 'tools',
+        example: '> /effort xhigh\nEffort: medium → xhigh (Opus 5.5)',
       },
       {
         cmd: '/permissions', desc: 'Gestionează permisiunile tool-urilor',
@@ -594,7 +600,7 @@ RFC 5322 pentru validare completă.`,
       {
         flag: '--model', short: '-m', arg: 'model-id',
         desc: 'Selectează modelul pentru sesiunea curentă. Suprascrie settings.json doar pentru această rulare.',
-        example: 'claude -m claude-opus-4-8 "Proiectează arhitectura microserviciilor"',
+        example: 'claude --model fable "Proiectează arhitectura microserviciilor"',
         grp: 'model',
       },
       {
@@ -723,7 +729,7 @@ RFC 5322 pentru validare completă.`,
         },
         {
           label: 'Debug with a stronger model',
-          code: '> /model claude-opus-4-8\n> "megathink: why do tests fail on CI?"\n> /model claude-sonnet-5  # switch back',
+          code: '> /effort xhigh\n> "Why do tests fail on CI?"\n> /model fable   # only if it still does not converge\n> /effort medium # back to the economical level',
         },
       ] as PatternItem[],
     },
@@ -731,7 +737,7 @@ RFC 5322 pentru validare completă.`,
       syntaxTitle: 'CLI flags — general syntax',
       syntaxCode: `claude [flags] [prompt]
 claude -p "prompt" --output-format json
-claude --model claude-opus-4-8 --verbose
+claude --model opus --effort high --verbose
 claude -c "continue the task"
 
 # Check the full list with:
@@ -1058,9 +1064,15 @@ RFC 5322 regex for full validation.`,
       // tools
       {
         cmd: '/model', args: '[model-id]', desc: 'View or change the active model',
-        detail: 'Without argument: shows current model and available alternatives. With argument: instant switch in session, without modifying settings.json.',
+        detail: 'Without argument: opens the picker (Enter = save as default, s = this session only). With argument (alias or ID): switches and saves the choice as the default for new sessions. Aliases: opus, sonnet, haiku, fable, best, opusplan.',
         cat: 'tools',
-        example: '> /model claude-opus-4-8\nSwitched: claude-sonnet-5 → claude-opus-4-8\nCost: ↑1,7× input · ↑1,7× output',
+        example: '> /model sonnet\nSwitched: Opus 5.5 → Sonnet 5\nCost: ↓2× input · ↓2× output',
+      },
+      {
+        cmd: '/effort', args: '[low|medium|high|xhigh|max|auto]', desc: 'Set how much the model thinks',
+        detail: 'Without argument: interactive slider. With argument: sets the level directly; auto returns to the model default (medium on Opus 5.5, high on Sonnet 5 / Fable 5.1). Works while Claude is working too — applies from the next request.',
+        cat: 'tools',
+        example: '> /effort xhigh\nEffort: medium → xhigh (Opus 5.5)',
       },
       {
         cmd: '/permissions', desc: 'Manage tool permissions',
@@ -1157,7 +1169,7 @@ RFC 5322 regex for full validation.`,
       {
         flag: '--model', short: '-m', arg: 'model-id',
         desc: 'Select the model for the current session. Overrides settings.json only for this run.',
-        example: 'claude -m claude-opus-4-8 "Design the microservices architecture"',
+        example: 'claude --model fable "Design the microservices architecture"',
         grp: 'model',
       },
       {

@@ -24,7 +24,7 @@ const CONTENT = {
     title: 'Gestionarea Tokenilor',
     description: 'Înțelege cum funcționează tokenii, cum să folosești prompt caching și strategii concrete pentru a reduce costurile fără să sacrifici calitatea.',
     stats: [
-      { value: '1M', label: 'tokeni context',  sub: 'Sonnet 5 & Opus 4.8 (Haiku: 200K)' },
+      { value: '1M', label: 'tokeni context',  sub: 'Sonnet 5, Opus 5.5, Fable 5.1 (Haiku: 200K)' },
       { value: '~10%', label: 'cost cache read', sub: 'față de input normal' },
       { value: '5 min', label: 'TTL prompt cache', sub: 'durată de viață' },
       { value: '3–5×', label: 'output vs input',  sub: 'output e mai scump' },
@@ -84,8 +84,9 @@ print(f'{resp.input_tokens} tokeni')
       ),
       colEquivalent: 'Echivalent',
       tableRows: [
-        { model: 'Claude Opus 4.8',   ctx: '1M',   out: '128K', eq: '~2.250 pagini A4' },
-        { model: 'Claude Sonnet 5',   ctx: '1M',   out: '128K', eq: '~2.250 pagini A4' },
+        { model: 'Claude Fable 5.1',  ctx: '1M',   out: '128K', eq: '~1.650 pagini A4' },
+        { model: 'Claude Opus 5.5',   ctx: '1M',   out: '128K', eq: '~1.650 pagini A4' },
+        { model: 'Claude Sonnet 5',   ctx: '1M',   out: '128K', eq: '~1.650 pagini A4' },
         { model: 'Claude Haiku 4.5',  ctx: '200K', out: '64K',  eq: '~450 pagini A4' },
       ],
       tokensSuffix: 'tokeni',
@@ -334,21 +335,21 @@ console.log(response.usage)
       colTask: 'Task tipic',
       colTokens: 'Tokeni estimați',
       tableRows: [
-        { task: 'Repară un bug simplu',         tokens: '2K–5K',     cost: '~$0.02' },
-        { task: 'Adaugă o funcționalitate mică', tokens: '5K–15K',    cost: '~$0.05' },
-        { task: 'Refactorizare modul mediu',     tokens: '15K–40K',   cost: '~$0.15' },
-        { task: 'Feature complex cu teste',      tokens: '40K–100K',  cost: '~$0.40' },
-        { task: 'Review complet codebase',       tokens: '100K–200K', cost: '~$1.00' },
+        { task: 'Repară un bug simplu',         tokens: '2K–5K',     cost: '~$0.03' },
+        { task: 'Adaugă o funcționalitate mică', tokens: '5K–15K',    cost: '~$0.07' },
+        { task: 'Refactorizare modul mediu',     tokens: '15K–40K',   cost: '~$0.20' },
+        { task: 'Feature complex cu teste',      tokens: '40K–100K',  cost: '~$0.53' },
+        { task: 'Review complet codebase',       tokens: '100K–200K', cost: '~$1.33' },
       ],
       warnBox: (
         <>
-          Costurile de mai sus sunt estimate pentru Sonnet 5 fără caching. Cu prompt caching activ, costul real scade cu <strong>30–60%</strong> pentru sesiunile lungi cu CLAUDE.md consistent.
+          Costurile de mai sus sunt estimate pentru Opus 5.5 (default-ul Claude Code) fără caching; pe Sonnet 5 sunt cam la jumătate. Cu prompt caching activ, costul real scade cu <strong>30–60%</strong> pentru sesiunile lungi cu CLAUDE.md consistent.
         </>
       ),
       bestTitle: 'Best practices finale',
       bestItems: [
         { text: 'Folosește Haiku 4.5 pentru task-uri simple: grep, sumar, întrebări rapide', color: 'text-green-400' },
-        { text: 'Reservă Opus 4.8 pentru arhitectură și decizii complexe',                   color: 'text-purple-400' },
+        { text: 'Reglează /effort înainte să schimbi modelul — medium pentru rutină, xhigh pentru probleme grele', color: 'text-purple-400' },
         { text: 'Activează /compact proactiv la ~60% context, nu aștepta warning-ul',        color: 'text-blue-400' },
         { text: 'Scrie CLAUDE.md concis — fiecare linie se adaugă la fiecare request',       color: 'text-amber-400' },
         { text: 'Batch task-uri similare în aceeași sesiune pentru a amortiza cache write cost', color: 'text-green-400' },
@@ -361,7 +362,7 @@ console.log(response.usage)
     title: 'Token Management',
     description: 'Understand how tokens work, how to use prompt caching, and concrete strategies to reduce costs without sacrificing quality.',
     stats: [
-      { value: '1M', label: 'context tokens',    sub: 'Sonnet 5 & Opus 4.8 (Haiku: 200K)' },
+      { value: '1M', label: 'context tokens',    sub: 'Sonnet 5, Opus 5.5, Fable 5.1 (Haiku: 200K)' },
       { value: '~10%', label: 'cache read cost',   sub: 'vs regular input cost' },
       { value: '5 min', label: 'prompt cache TTL', sub: 'cache entry lifetime' },
       { value: '3–5×', label: 'output vs input',   sub: 'output costs more' },
@@ -421,8 +422,9 @@ print(f'{resp.input_tokens} tokens')
       ),
       colEquivalent: 'Equivalent',
       tableRows: [
-        { model: 'Claude Opus 4.8',   ctx: '1M',   out: '128K', eq: '~2,250 A4 pages' },
-        { model: 'Claude Sonnet 5',   ctx: '1M',   out: '128K', eq: '~2,250 A4 pages' },
+        { model: 'Claude Fable 5.1',  ctx: '1M',   out: '128K', eq: '~1,650 A4 pages' },
+        { model: 'Claude Opus 5.5',   ctx: '1M',   out: '128K', eq: '~1,650 A4 pages' },
+        { model: 'Claude Sonnet 5',   ctx: '1M',   out: '128K', eq: '~1,650 A4 pages' },
         { model: 'Claude Haiku 4.5',  ctx: '200K', out: '64K',  eq: '~450 A4 pages' },
       ],
       tokensSuffix: 'tokens',
@@ -667,21 +669,21 @@ console.log(response.usage)
       colTask: 'Typical task',
       colTokens: 'Estimated tokens',
       tableRows: [
-        { task: 'Fix a simple bug',             tokens: '2K–5K',     cost: '~$0.02' },
-        { task: 'Add a small feature',           tokens: '5K–15K',    cost: '~$0.05' },
-        { task: 'Refactor a medium module',      tokens: '15K–40K',   cost: '~$0.15' },
-        { task: 'Complex feature with tests',    tokens: '40K–100K',  cost: '~$0.40' },
-        { task: 'Full codebase review',          tokens: '100K–200K', cost: '~$1.00' },
+        { task: 'Fix a simple bug',             tokens: '2K–5K',     cost: '~$0.03' },
+        { task: 'Add a small feature',           tokens: '5K–15K',    cost: '~$0.07' },
+        { task: 'Refactor a medium module',      tokens: '15K–40K',   cost: '~$0.20' },
+        { task: 'Complex feature with tests',    tokens: '40K–100K',  cost: '~$0.53' },
+        { task: 'Full codebase review',          tokens: '100K–200K', cost: '~$1.33' },
       ],
       warnBox: (
         <>
-          The costs above are estimates for Sonnet 5 without caching. With prompt caching active, the real cost drops by <strong>30–60%</strong> for long sessions with a consistent CLAUDE.md.
+          The costs above are estimates for Opus 5.5 (the Claude Code default) without caching; on Sonnet 5 they are roughly half. With prompt caching active, the real cost drops by <strong>30–60%</strong> for long sessions with a consistent CLAUDE.md.
         </>
       ),
       bestTitle: 'Final best practices',
       bestItems: [
         { text: 'Use Haiku 4.5 for simple tasks: grep, summaries, quick questions',     color: 'text-green-400' },
-        { text: 'Reserve Opus 4.8 for architecture and complex decisions',               color: 'text-purple-400' },
+        { text: 'Tune /effort before switching models — medium for routine, xhigh for hard problems', color: 'text-purple-400' },
         { text: 'Run /compact proactively at ~60% context, do not wait for the warning', color: 'text-blue-400' },
         { text: 'Keep CLAUDE.md concise — every line is added to every request',         color: 'text-amber-400' },
         { text: 'Batch similar tasks in the same session to amortize cache write cost',  color: 'text-green-400' },
@@ -945,7 +947,7 @@ function TabMonitorizare() {
             <tr className="border-b border-zinc-800 bg-zinc-900/50">
               <th className="px-4 py-3 text-left font-semibold text-zinc-300">{c.colTask}</th>
               <th className="px-4 py-3 text-left font-semibold text-zinc-300">{c.colTokens}</th>
-              <th className="px-4 py-3 text-left font-semibold text-zinc-300">Cost Sonnet 5</th>
+              <th className="px-4 py-3 text-left font-semibold text-zinc-300">Cost Opus 5.5</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800/50">
